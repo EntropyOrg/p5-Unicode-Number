@@ -16,7 +16,7 @@ BEGIN {
 		#$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
 	#);
 }
-XSLoader::load( 'Unicode::Number', $Unicode::Number::{VERSION} );
+XSLoader::load( 'Unicode::Number', ${$Unicode::Number::{VERSION}} );
 
 sub new {
 	bless {}, shift;
