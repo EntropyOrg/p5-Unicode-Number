@@ -36,6 +36,9 @@ my %WriteMakefileArgs = (
     "Test::More" => 0
   },
   "VERSION" => "0.001",
+  "XS" => {
+    "lib/Unicode/Number.xs" => "lib/Unicode/Number.c"
+  },
   "test" => {
     "TESTS" => "t/*.t"
   }

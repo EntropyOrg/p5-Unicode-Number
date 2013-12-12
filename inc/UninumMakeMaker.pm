@@ -14,6 +14,9 @@ override _build_WriteMakefile_args => sub { +{
     %{ super() },
     CCFLAGS => $cflags,
     LIBS => [ $libs ],
+    XS      => {
+        "lib/Unicode/Number.xs" => "lib/Unicode/Number.c",
+    }
 } };
  
 __PACKAGE__->meta->make_immutable;
