@@ -14,6 +14,7 @@ BEGIN {
 	XSLoader::load(
 		'Unicode::Number',
 		#$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
+		'0.001'
 	);
 }
 
