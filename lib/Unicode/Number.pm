@@ -11,10 +11,10 @@ use Alien::Uninum;
 
 BEGIN {
 	require XSLoader;
-	XSLoader::load(
-		'Unicode::Number',
-		$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
-	);
+	#XSLoader::load(
+		#'Unicode::Number',
+		#$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
+	#);
 }
 XSLoader::load( 'Unicode::Number', $Unicode::Number::{VERSION} );
 
