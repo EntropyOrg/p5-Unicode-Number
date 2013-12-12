@@ -6,6 +6,7 @@ Makefile.PL
 README
 README.md
 dist.ini
+inc/UninumMakeMaker.pm
 lib/Unicode/Number.pm
 lib/Unicode/Number.xs
 t/version.t
