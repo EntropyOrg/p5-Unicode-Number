@@ -9,13 +9,10 @@ use warnings;
 
 use Alien::Uninum;
 
-BEGIN {
-	require XSLoader;
-	#XSLoader::load(
-		#'Unicode::Number',
-		#$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
-	#);
-}
+use XSLoader;
+#BEGIN {
+	#require XSLoader;
+#}
 XSLoader::load( 'Unicode::Number', $Unicode::Number::VERSION );
 
 sub new {
