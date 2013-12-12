@@ -13,8 +13,8 @@ use XSLoader;
 BEGIN {
 	XSLoader::load(
 		'Unicode::Number',
-		#$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
-		'0.001'
+		$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
+		#'0.001'
 	);
 }
 
