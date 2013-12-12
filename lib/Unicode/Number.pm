@@ -10,7 +10,12 @@ use warnings;
 use Alien::Uninum;
 use XSLoader;
 
-XSLoader::load(__PACKAGE__, $__PACKAGE__::VERSION);
+BEGIN {
+	XSLoader::load(
+		'Unicode::Number',
+		$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
+	);
+}
 
 1;
 
