@@ -2,6 +2,9 @@ use Test::More;
 
 use_ok 'Unicode::Number';
 
-is( Unicode::Number::version(), '2.' );
+my $uni = Unicode::Number->new();
+
+isa_ok( $uni, 'Unicode::Number' );
+is( $uni->version(), '2.7' );
 
 done_testing;
