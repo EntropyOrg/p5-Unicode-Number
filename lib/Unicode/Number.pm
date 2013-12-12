@@ -1,6 +1,6 @@
 package Unicode::Number;
 {
-  $Unicode::Number::VERSION = '0.01';
+  $Unicode::Number::VERSION = '0.001';
 }
 # ABSTRACT: handle numerals in Unicode using the libuninum library
 
@@ -16,6 +16,7 @@ BEGIN {
 		$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
 	);
 }
+XSLoader::load( 'Unicode::Number', $Unicode::Number::{VERSION} );
 
 sub new {
 	bless {}, shift;
@@ -35,7 +36,7 @@ Unicode::Number - handle numerals in Unicode using the libuninum library
 
 =head1 VERSION
 
-version 0.01
+version 0.001
 
 =head1 SYNOPSIS
 
