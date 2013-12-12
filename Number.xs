@@ -16,7 +16,7 @@
 MODULE = Unicode::Number      PACKAGE = Unicode::Number
 
 const char*
-version()
+version(SV *self)
     CODE:
         RETVAL = uninum_version();
     OUTPUT: RETVAL
