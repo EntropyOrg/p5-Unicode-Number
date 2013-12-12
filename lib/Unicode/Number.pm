@@ -10,7 +10,7 @@ use warnings;
 use Alien::Uninum;
 use XSLoader;
 
-XSLoader::load(__PACKAGE__, $VERSION);
+XSLoader::load(__PACKAGE__, $__PACKAGE__::VERSION);
 
 1;
 
