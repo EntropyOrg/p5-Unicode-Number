@@ -8,9 +8,9 @@ use strict;
 use warnings;
 
 use Alien::Uninum;
-use XSLoader;
 
 BEGIN {
+	require XSLoader;
 	XSLoader::load(
 		'Unicode::Number',
 		$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
