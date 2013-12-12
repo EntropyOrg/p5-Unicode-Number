@@ -18,6 +18,10 @@ BEGIN {
 	);
 }
 
+sub new {
+	bless {}, shift;
+}
+
 1;
 
 __END__
