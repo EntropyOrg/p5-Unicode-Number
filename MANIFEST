@@ -9,4 +9,5 @@ README.md
 dist.ini
 inc/UninumMakeMaker.pm
 lib/Unicode/Number.pm
+ppport.h
 t/version.t
