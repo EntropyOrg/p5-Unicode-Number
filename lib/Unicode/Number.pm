@@ -13,7 +13,7 @@ BEGIN {
 	require XSLoader;
 	XSLoader::load(
 		'Unicode::Number',
-		$VERSION
+		$Unicode::Number::VERSION
 		#$Unicode::Number::{VERSION} ? ${ $Unicode::Number::{VERSION} } : ()
 		#'0.001'
 	);
