@@ -11,7 +11,7 @@ use Alien::Uninum;
 
 BEGIN {
 	require XSLoader;
-	print $Unicode::Number::VERSION, "\n";
+	die $Unicode::Number::VERSION, "\n";
 	XSLoader::load(
 		'Unicode::Number',
 		$Unicode::Number::VERSION
