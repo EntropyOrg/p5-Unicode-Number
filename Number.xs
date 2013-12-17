@@ -68,7 +68,7 @@ list_number_systems(SV* self)
 MODULE = Unicode::Number::System      PACKAGE = Unicode::Number::System
 
 SV*
-new(int ns, char* string)
+new(char* class, int ns, char* string)
 	CODE:
 		HV* hash = newHV(); /* Create a hash */
 
