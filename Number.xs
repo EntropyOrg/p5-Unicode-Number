@@ -50,14 +50,14 @@ list_number_systems(SV* self)
 	INIT:
 		AV* l;
 		l = (AV *)sv_2mortal((SV *)newAV());
-		char* ns_str;
+		const char* ns_str;
 		int ns_num;
 	CODE:
 		while (ns_str = ListNumberSystems(1,0)) {
 			HV * rh;
 			rh = (HV *)sv_2mortal((SV *)newHV());
 			ns_num = StringToNumberSystem(ns_str);
-			hv_stores(rh, "s", newSVpv(ns_str));
+			hv_stores(rh, "s", newSVpvs(ns_str));
 			hv_stores(rh, "n", newSViv(ns_num));
 			av_push(l, newRV((SV *)rh));
 		}
