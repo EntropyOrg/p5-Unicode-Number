@@ -1,3 +1,5 @@
+/* vim: ts=4 sw=4
+ */
 #include "EXTERN.h"
 #include "perl.h"
 #include "XSUB.h"
@@ -86,5 +88,3 @@ name(const char* class)
 		RETVAL = "test";
 	OUTPUT: RETVAL
 
-/* vim: ts=4 sw=4
- */
