@@ -15,14 +15,14 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "handle numerals in Unicode using the libuninum library",
   "AUTHOR" => "Zakariyya Mughal <zmughal\@cpan.org>",
   "BUILD_REQUIRES" => {},
-  "CCFLAGS" => "-I/home/zaki/.perlbrew/libs/perl-5.16.3\@junk/lib/perl5/auto/share/dist/Alien-Uninum/include/uninum",
+  "CCFLAGS" => "-I/home/zaki/perl5/perlbrew/perls/perl-5.18.1/lib/site_perl/5.18.1/auto/share/dist/Alien-Uninum/include/uninum",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
   "DISTNAME" => "Unicode-Number",
   "EXE_FILES" => [],
   "LIBS" => [
-    "-L/home/zaki/.perlbrew/libs/perl-5.16.3\@junk/lib/perl5/auto/share/dist/Alien-Uninum/lib -luninum"
+    "-L/home/zaki/perl5/perlbrew/perls/perl-5.18.1/lib/site_perl/5.18.1/auto/share/dist/Alien-Uninum/lib -luninum"
   ],
   "LICENSE" => "perl",
   "NAME" => "Unicode::Number",

@@ -9,7 +9,7 @@ my $cflags = $uni->cflags;
 my $libs   = $uni->libs;
 
 extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
- 
+
 override _build_WriteMakefile_args => sub { +{
     %{ super() },
     CCFLAGS => $cflags,
@@ -18,5 +18,5 @@ override _build_WriteMakefile_args => sub { +{
         "lib/Unicode/Number.xs" => "lib/Unicode/Number.c",
     }
 } };
- 
+
 __PACKAGE__->meta->make_immutable;
