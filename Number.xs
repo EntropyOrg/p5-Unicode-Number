@@ -50,7 +50,7 @@ list_number_systems(SV* self)
 	INIT:
 		AV* l;
 		l = (AV *)sv_2mortal((SV *)newAV());
-		const char* ns_str;
+		char* ns_str;
 		int ns_num;
 		size_t len;
 	CODE:
