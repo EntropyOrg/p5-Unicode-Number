@@ -15,6 +15,28 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
+const char* uninum_error_str() {
+	switch(uninum_err) {
+		case NS_ERROR_OKAY:                  return "No error";
+		case NS_ERROR_BADCHARACTER:          return "String contains illegal character";
+		case NS_ERROR_DOESNOTFIT:            return "Value does not fit into binary type";
+		case NS_ERROR_NUMBER_SYSTEM_UNKNOWN: return "The number system identifier is unknown";
+		case NS_ERROR_BADBASE:               return "The specified base is not acceptable";
+		case NS_ERROR_NOTCONSISTENTWITHBASE: return "The string contains a digit too large for the base";
+		case NS_ERROR_OUTOFMEMORY:           return "Storage allocation failed";
+		case NS_ERROR_RANGE:                 return "Number is larger than is representable in the number system";
+		case NS_ERROR_OUTSIDE_BMP:           return "The string contains a character outside the BMP";
+		case NS_ERROR_NOZERO:                return "The number system cannot represent zero";
+		case NS_ERROR_ILLFORMED:             return "The string is not a valid number in the specified number system for a reason other than one of those specified above, e.g. it lacks a required number marker.";
+	}
+	return "Invalid error";
+}
+
+
+int uninum_is_ok() {
+	return uninum_err == NS_ERROR_OKAY;
+}
+
 MODULE = Unicode::Number      PACKAGE = Unicode::Number
 
 const char*
