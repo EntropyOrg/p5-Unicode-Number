@@ -15,8 +15,8 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
-const char* uninum_error_str(int err) {
-	switch(err) {
+const char* uninum_error_str() {
+	switch(uninum_err) {
 		case NS_ERROR_OKAY:                  return "No error";
 		case NS_ERROR_BADCHARACTER:          return "String contains illegal character";
 		case NS_ERROR_DOESNOTFIT:            return "Value does not fit into binary type";
