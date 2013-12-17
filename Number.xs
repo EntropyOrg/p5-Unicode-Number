@@ -15,18 +15,22 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
-char uninum_err_str[256][256];
-uninum_err_str[NS_ERROR_OKAY]                  = "No error";
-uninum_err_str[NS_ERROR_BADCHARACTER]          = "String contains illegal character";
-uninum_err_str[NS_ERROR_DOESNOTFIT]            = "Value does not fit into binary type";
-uninum_err_str[NS_ERROR_NUMBER_SYSTEM_UNKNOWN] = "The number system identifier is unknown";
-uninum_err_str[NS_ERROR_BADBASE]               = "The specified base is not acceptable";
-uninum_err_str[NS_ERROR_NOTCONSISTENTWITHBASE] = "The string contains a digit too large for the base";
-uninum_err_str[NS_ERROR_OUTOFMEMORY]           = "Storage allocation failed";
-uninum_err_str[NS_ERROR_RANGE]                 = "Number is larger than is representable in the number system";
-uninum_err_str[NS_ERROR_OUTSIDE_BMP]           = "The string contains a character outside the BMP";
-uninum_err_str[NS_ERROR_NOZERO]                = "The number system cannot represent zero";
-uninum_err_str[NS_ERROR_ILLFORMED]             = "The string is not a valid number in the specified number system for a reason other than one of those specified above, e.g. it lacks a required number marker.";
+const char* uninum_err_str(int err) {
+	switch(err) {
+		case NS_ERROR_OKAY:                  return "No error";
+		case NS_ERROR_BADCHARACTER:          return "String contains illegal character";
+		case NS_ERROR_DOESNOTFIT:            return "Value does not fit into binary type";
+		case NS_ERROR_NUMBER_SYSTEM_UNKNOWN: return "The number system identifier is unknown";
+		case NS_ERROR_BADBASE:               return "The specified base is not acceptable";
+		case NS_ERROR_NOTCONSISTENTWITHBASE: return "The string contains a digit too large for the base";
+		case NS_ERROR_OUTOFMEMORY:           return "Storage allocation failed";
+		case NS_ERROR_RANGE:                 return "Number is larger than is representable in the number system";
+		case NS_ERROR_OUTSIDE_BMP:           return "The string contains a character outside the BMP";
+		case NS_ERROR_NOZERO:                return "The number system cannot represent zero";
+		case NS_ERROR_ILLFORMED:             return "The string is not a valid number in the specified number system for a reason other than one of those specified above, e.g. it lacks a required number marker.";
+	}
+}
+
 
 int uninum_is_ok() {
 	return uninum_err == NS_ERROR_OKAY;
