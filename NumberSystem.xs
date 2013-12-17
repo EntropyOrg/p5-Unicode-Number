@@ -1,4 +1,5 @@
-
+/* vim: ts=4 sw=4
+ */
 MODULE = Unicode::Number::System      PACKAGE = Unicode::Number::System
 
 SV*
