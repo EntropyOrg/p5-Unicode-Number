@@ -15,7 +15,7 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
-char* uninum_err_str[256];
+char uninum_err_str[256][256];
 uninum_err_str[NS_ERROR_OKAY]                  = "No error";
 uninum_err_str[NS_ERROR_BADCHARACTER]          = "String contains illegal character";
 uninum_err_str[NS_ERROR_DOESNOTFIT]            = "Value does not fit into binary type";
