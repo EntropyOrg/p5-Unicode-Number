@@ -15,7 +15,7 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
-const char* uninum_err_str(int err) {
+const char* uninum_error_str(int err) {
 	switch(err) {
 		case NS_ERROR_OKAY:                  return "No error";
 		case NS_ERROR_BADCHARACTER:          return "String contains illegal character";
@@ -29,17 +29,13 @@ const char* uninum_err_str(int err) {
 		case NS_ERROR_NOZERO:                return "The number system cannot represent zero";
 		case NS_ERROR_ILLFORMED:             return "The string is not a valid number in the specified number system for a reason other than one of those specified above, e.g. it lacks a required number marker.";
 	}
+	return "Invalid error";
 }
 
 
 int uninum_is_ok() {
 	return uninum_err == NS_ERROR_OKAY;
 }
-
-const char* uninum_error_str() {
-	return uninum_err_str[uninum_err];
-}
-
 
 MODULE = Unicode::Number      PACKAGE = Unicode::Number
 
