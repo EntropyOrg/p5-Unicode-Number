@@ -15,8 +15,6 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
-size_t NUMBER_OF_NS
-
 char* uninum_err_str[256];
 uninum_err_str[NS_ERROR_OKAY]                  = "No error";
 uninum_err_str[NS_ERROR_BADCHARACTER]          = "String contains illegal character";
