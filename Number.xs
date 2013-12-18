@@ -15,8 +15,8 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
-typedef SV* Unicode__Number;
-typedef SV* Unicode__Number__System;
+typedef HV* Unicode__Number;
+typedef HV* Unicode__Number__System;
 
 const char* uninum_error_str() {
 	switch(uninum_err) {
@@ -60,8 +60,7 @@ list_number_systems(Unicode::Number self)
 		AV** ref;
 		int which;
 	CODE:
-		HV* hash = (HV*)SvRV(self);
-		if( NULL == (ref = (AV**)hv_fetchs(hash, "_list_ns_cache", 0)) ) {
+		if( NULL == (ref = (AV**)hv_fetchs(self, "_list_ns_cache", 0)) ) {
 			/* not cached yet */
 			l = (AV *)sv_2mortal((SV *)newAV());
 			/* which = 1 : get all number systems that can be used in both
@@ -89,7 +88,7 @@ list_number_systems(Unicode::Number self)
 			}
 			SV* l_ref = newRV((SV *)l);
 			SvREFCNT_inc((SV*) l);
-			hv_stores(hash, "_list_ns_cache", (SV*)l);
+			hv_stores(self, "_list_ns_cache", (SV*)l);
 			ref = &l;
 		}
 		RETVAL = (AV*)SvREFCNT_inc(*ref);
