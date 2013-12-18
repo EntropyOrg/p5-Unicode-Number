@@ -45,9 +45,8 @@ version(SV *self)
 		RETVAL = uninum_version();
 	OUTPUT: RETVAL
 
-/* retrieves number systems
- * and caches the result
- */
+# retrieves number systems
+# and caches the result
 SV*
 list_number_systems(SV* self)
 	INIT:
@@ -56,26 +55,35 @@ list_number_systems(SV* self)
 		int ns_num;
 		size_t len;
 		SV** ref;
+		int which;
 	CODE:
 		HV* hash = (HV*)SvRV(self);
 		if( NULL == (ref = hv_fetchs(hash, "_list_ns_cache", 0)) ) {
 			/* not cached yet */
 			l = (AV *)sv_2mortal((SV *)newAV());
-			while (ns_str = ListNumberSystems(1,0)) {
-				HV * rh;
-				rh = (HV *)sv_2mortal((SV *)newHV());
+			/* which = 1 : get all number systems that can be used in both
+			 *             directions
+			 * which = 0 : get number systems that can only be used from string
+			 *             to numbers
+			 */
+			for(which = 0; which <= 1; which++ ) {
+				while (ns_str = ListNumberSystems(1,which)) {
+					HV * rh;
+					rh = (HV *)sv_2mortal((SV *)newHV());
 
-				/* get the ID for the number system */
-				ns_num = StringToNumberSystem(ns_str);
+					/* get the ID for the number system */
+					ns_num = StringToNumberSystem(ns_str);
 
-				/* store in hash { s => $str, n => $id } */
-				len = strlen(ns_str);
-				hv_stores(rh, "s", newSVpv(ns_str, len));
-				hv_stores(rh, "n", newSViv(ns_num));
+					/* store in hash { s => $str, n => $id } */
+					len = strlen(ns_str);
+					hv_stores(rh, "s", newSVpv(ns_str, len));
+					hv_stores(rh, "n", newSViv(ns_num));
+					hv_stores(rh, "both_dir", newSViv( !which ));
 
-				av_push(l, newRV((SV *)rh)); /* and add to list */
+					av_push(l, newRV((SV *)rh)); /* and add to list */
+				}
+				ListNumberSystems(0,0); /* Reset */
 			}
-			ListNumberSystems(0,0); /* Reset */
 			SV* l_ref = newRV((SV *)l);
 			hv_stores(hash, "_list_ns_cache", l_ref);
 			ref = &l_ref;
