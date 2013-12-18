@@ -5,9 +5,9 @@ use_ok 'Unicode::Number';
 my $uni = Unicode::Number->new();
 
 my $ns = $uni->list_number_systems();
+$ns = $uni->list_number_systems();
+$ns = $uni->list_number_systems();
 
-use DDP; p $ns;
-
-use DDP; p $uni->{_list_ns_cache};
+#use DDP; p $ns;
 
 done_testing;
