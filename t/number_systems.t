@@ -8,4 +8,6 @@ my $ns = $uni->list_number_systems();
 
 use DDP; p $ns;
 
+use DDP; p $uni;
+
 done_testing;
