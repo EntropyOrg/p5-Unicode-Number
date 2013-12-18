@@ -13,3 +13,4 @@ lib/Unicode/Number.pm
 ppport.h
 t/number_systems.t
 t/version.t
+typemap
