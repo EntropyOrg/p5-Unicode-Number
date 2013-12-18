@@ -1,1 +1,2 @@
-Unicode::Number        T_PTROBJ
+Unicode::Number            T_PTROBJ
+Unicode::Number::System    T_PTROBJ

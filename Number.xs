@@ -15,6 +15,9 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
+typedef SV* Unicode__Number;
+typedef SV* Unicode__Number__System;
+
 const char* uninum_error_str() {
 	switch(uninum_err) {
 		case NS_ERROR_OKAY:                  return "No error";
@@ -93,7 +96,7 @@ list_number_systems(Unicode::Number self)
 
 MODULE = Unicode::Number::System      PACKAGE = Unicode::Number::System
 
-SV*
+Unicode::Number::System
 _new(const char* class, int ns, char* string, int both_dir)
 	CODE:
 		HV* hash = newHV(); /* Create a hash */
