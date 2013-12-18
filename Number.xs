@@ -54,7 +54,8 @@ list_number_systems(SV* self)
 		size_t len;
 		SV** ref;
 	CODE:
-		/*if( NULL == (ref = hv_fetchs((HV *)self, "_list_ns_cache", 0)) ) {*/
+		SV* hash = SvRV(self);
+		if( NULL == (ref = hv_fetchs((HV *)hash, "_list_ns_cache", 0)) ) {
 			/* not cached yet */
 			l = (AV *)sv_2mortal((SV *)newAV());
 			while (ns_str = ListNumberSystems(1,0)) {
@@ -70,7 +71,7 @@ list_number_systems(SV* self)
 			SV* rref = newRV((SV *)l);
 			RETVAL = rref;
 			/*ref = &rref;*/
-			hv_stores((HV *)self, "_list_ns_cache", rref);
+			hv_stores((HV *)hash, "_list_ns_cache", rref);
 		/*}*/
 		/*RETVAL = *ref;*/
 	OUTPUT: RETVAL
