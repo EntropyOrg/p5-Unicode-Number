@@ -8,6 +8,6 @@ my $ns = $uni->list_number_systems();
 
 use DDP; p $ns;
 
-use DDP; p $uni;
+use DDP; p $uni->{_list_ns_cache};
 
 done_testing;
