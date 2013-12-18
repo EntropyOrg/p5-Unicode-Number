@@ -72,6 +72,8 @@ list_number_systems(SV* self)
 			SV* l_ref = newRV((SV *)l);
 			hv_stores(hash, "_list_ns_cache", l_ref);
 			ref = &l_ref;
+		} else {
+			fprintf(stderr, "Caching works!!\n");
 		}
 		RETVAL = newRV(*ref);
 	OUTPUT: RETVAL
