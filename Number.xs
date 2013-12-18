@@ -55,6 +55,7 @@ list_number_systems(SV* self)
 		SV** ref;
 	CODE:
 		if( NULL == (ref = hv_fetchs((HV *)self, "_list_ns_cache", 0)) ) {
+			exit(0);
 			/* not cached yet */
 			l = (AV *)sv_2mortal((SV *)newAV());
 			while (ns_str = ListNumberSystems(1,0)) {
