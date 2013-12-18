@@ -45,8 +45,8 @@ version(SV *self)
 		RETVAL = uninum_version();
 	OUTPUT: RETVAL
 
-	/* retrieves number systems
-	 * and caches the result */
+ # retrieves number systems
+ # and caches the result
 SV*
 list_number_systems(SV* self)
 	INIT:
