@@ -52,17 +52,23 @@ list_number_systems(SV* self)
 		char* ns_str;
 		int ns_num;
 		size_t len;
+		SV* ref;
 	CODE:
-		l = (AV *)sv_2mortal((SV *)newAV());
-		while (ns_str = ListNumberSystems(1,0)) {
-			HV * rh;
-			rh = (HV *)sv_2mortal((SV *)newHV());
-			ns_num = StringToNumberSystem(ns_str);
-			len = strlen(ns_str);
-			hv_stores(rh, "s", newSVpv(ns_str, len));
-			hv_stores(rh, "n", newSViv(ns_num));
-			av_push(l, newRV((SV *)rh));
+		if( NULL == (ref = hv_fetchs(self, "_list_ns_cache")) ) {
+			/* not cached yet */
+			l = (AV *)sv_2mortal((SV *)newAV());
+			while (ns_str = ListNumberSystems(1,0)) {
+				HV * rh;
+				rh = (HV *)sv_2mortal((SV *)newHV());
+				ns_num = StringToNumberSystem(ns_str);
+				len = strlen(ns_str);
+				hv_stores(rh, "s", newSVpv(ns_str, len));
+				hv_stores(rh, "n", newSViv(ns_num));
+				av_push(l, newRV((SV *)rh));
+			}
+			ListNumberSystems(0,0); /* Reset */
+			ref = newRV((SV *)l);
+			hv_stores(self, "_list_ns_cache", ref);
 		}
-		ListNumberSystems(0,0); /* Reset */
-		RETVAL = newRV((SV *)l);
+		RETVAL = ref;
 	OUTPUT: RETVAL
