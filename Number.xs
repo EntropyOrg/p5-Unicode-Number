@@ -94,24 +94,3 @@ list_number_systems(Unicode::Number self)
 		RETVAL = newRV(*ref);
 	OUTPUT: RETVAL
 
-MODULE = Unicode::Number::System      PACKAGE = Unicode::Number::System
-
-Unicode::Number::System
-_new(const char* class, int ns, char* string, int both_dir)
-	CODE:
-		HV* hash = newHV(); /* Create a hash */
-
-		/* Create a reference to the hash */
-		SV *const self = newRV_noinc( (SV *)hash );
-
-		/* bless into the proper package */
-		RETVAL = sv_bless( self, gv_stashpv( class, 0 ) );
-	OUTPUT: RETVAL
-
-
-const char*
-name(const char* class)
-	CODE:
-		RETVAL = "test";
-	OUTPUT: RETVAL
-
