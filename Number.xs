@@ -70,7 +70,7 @@ list_number_systems(SV* self)
 			ListNumberSystems(0,0); /* Reset */
 			SV* l_ref = newRV((SV *)l);
 			hv_stores(hash, "_list_ns_cache", l_ref);
-			RETVAL = l_ref;
+			RETVAL = newRV((SV*)l_ref);
 		} else {
 			RETVAL = newRV(*ref);
 		}
