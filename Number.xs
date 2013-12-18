@@ -87,11 +87,11 @@ list_number_systems(Unicode::Number self)
 				}
 				ListNumberSystems(0,0); /* Reset */
 			}
-			SV* l_ref = (SV *)l;
+			SV* l_ref = newRV((SV *)l);
 			hv_stores(hash, "_list_ns_cache", l_ref);
 			ref = &l_ref;
 		}
-		RETVAL = *ref;
+		RETVAL = newRV(*ref);
 	OUTPUT: RETVAL
 
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
