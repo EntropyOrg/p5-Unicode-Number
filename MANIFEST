@@ -4,7 +4,6 @@ MANIFEST
 META.yml
 Makefile.PL
 Number.xs
-NumberSystem.xs
 README
 README.md
 dist.ini
