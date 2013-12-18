@@ -45,7 +45,7 @@ version(SV *self)
 		RETVAL = uninum_version();
 	OUTPUT: RETVAL
 
-int
+SV*
 list_number_systems(SV* self)
 	INIT:
 		AV* l;
@@ -54,7 +54,7 @@ list_number_systems(SV* self)
 		size_t len;
 		SV** ref;
 	CODE:
-		if( NULL == (ref = hv_fetchs((HV *)self, "_list_ns_cache", 0)) ) {
+		/*if( NULL == (ref = hv_fetchs((HV *)self, "_list_ns_cache", 0)) ) {*/
 			/* not cached yet */
 			l = (AV *)sv_2mortal((SV *)newAV());
 			while (ns_str = ListNumberSystems(1,0)) {
@@ -70,7 +70,6 @@ list_number_systems(SV* self)
 			SV* rref = newRV((SV *)l);
 			ref = &rref;
 			hv_stores((HV *)self, "_list_ns_cache", rref);
-		}
-		RETVAL = 42;
-		/*RETVAL = *ref;*/
+		/*}*/
+		RETVAL = *ref;
 	OUTPUT: RETVAL
