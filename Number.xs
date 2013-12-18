@@ -50,18 +50,18 @@ version(Unicode::Number self)
 
 # retrieves number systems
 # and caches the result
-SV*
+AV*
 list_number_systems(Unicode::Number self)
 	INIT:
 		AV* l;
 		char* ns_str;
 		int ns_num;
 		size_t len;
-		SV** ref;
+		AV** ref;
 		int which;
 	CODE:
 		HV* hash = (HV*)SvRV(self);
-		if( NULL == (ref = hv_fetchs(hash, "_list_ns_cache", 0)) ) {
+		if( NULL == (ref = (AV**)hv_fetchs(hash, "_list_ns_cache", 0)) ) {
 			/* not cached yet */
 			l = (AV *)sv_2mortal((SV *)newAV());
 			/* which = 1 : get all number systems that can be used in both
