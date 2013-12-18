@@ -89,7 +89,7 @@ list_number_systems(Unicode::Number self)
 			}
 			SV* l_ref = newRV((SV *)l);
 			SvREFCNT_inc((SV*) l);
-			hv_stores(hash, "_list_ns_cache", l);
+			hv_stores(hash, "_list_ns_cache", (SV*)l);
 			ref = &l;
 		}
 		RETVAL = SvREFCNT_inc(*ref);
