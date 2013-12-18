@@ -45,7 +45,7 @@ version(SV *self)
 		RETVAL = uninum_version();
 	OUTPUT: RETVAL
 
-SV*
+int
 list_number_systems(SV* self)
 	INIT:
 		AV* l;
