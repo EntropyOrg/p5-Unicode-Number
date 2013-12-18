@@ -72,5 +72,5 @@ list_number_systems(SV* self)
 			hv_stores(hash, "_list_ns_cache", s);
 			ref = &s;
 		}
-		RETVAL = *ref;
+		RETVAL = newRV(*ref);
 	OUTPUT: RETVAL
