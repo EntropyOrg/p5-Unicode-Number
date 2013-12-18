@@ -15,8 +15,8 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
-typedef SV* Unicode__Number;
-typedef SV* Unicode__Number__System;
+/*typedef SV* Unicode__Number;*/
+/*typedef SV* Unicode__Number__System;*/
 
 const char* uninum_error_str() {
 	switch(uninum_err) {
@@ -51,7 +51,7 @@ version(SV *self)
 # retrieves number systems
 # and caches the result
 SV*
-list_number_systems(SV* self)
+list_number_systems(Unicode::Number self)
 	INIT:
 		AV* l;
 		char* ns_str;
@@ -96,7 +96,7 @@ list_number_systems(SV* self)
 
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 
-SV*
+Unicode::Number::System
 _new(const char* class, int ns, char* string, int both_dir)
 	CODE:
 		HV* hash = newHV(); /* Create a hash */
