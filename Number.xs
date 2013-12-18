@@ -66,7 +66,7 @@ list_number_systems(SV* self)
 			 * which = 0 : get number systems that can only be used from string
 			 *             to numbers
 			 */
-			for(int which = 0; which <= 1; which++ )
+			for(int which = 0; which <= 1; which++ ) {
 				while (ns_str = ListNumberSystems(1,which)) {
 					HV * rh;
 					rh = (HV *)sv_2mortal((SV *)newHV());
