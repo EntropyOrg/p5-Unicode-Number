@@ -68,9 +68,10 @@ list_number_systems(SV* self)
 				av_push(l, newRV((SV *)rh));
 			}
 			ListNumberSystems(0,0); /* Reset */
-			SV* s = newRV((SV *)l);
-			hv_stores(hash, "_list_ns_cache", s);
-			ref = &s;
+			SV* l_ref = newRV((SV *)l);
+			hv_stores(hash, "_list_ns_cache", l_ref);
+			RETVAL = l_ref;
+		} else {
+			RETVAL = newRV(*ref);
 		}
-		RETVAL = newRV(*ref);
 	OUTPUT: RETVAL
