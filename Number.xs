@@ -51,7 +51,7 @@ version(SV *self)
 # retrieves number systems
 # and caches the result
 SV*
-list_number_systems(Unicode::Number self)
+list_number_systems(SV* self)
 	INIT:
 		AV* l;
 		char* ns_str;
@@ -96,7 +96,7 @@ list_number_systems(Unicode::Number self)
 
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 
-Unicode::Number::System
+SV*
 _new(const char* class, int ns, char* string, int both_dir)
 	CODE:
 		HV* hash = newHV(); /* Create a hash */
