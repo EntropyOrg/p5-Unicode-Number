@@ -92,7 +92,7 @@ list_number_systems(Unicode::Number self)
 			hv_stores(hash, "_list_ns_cache", (SV*)l);
 			ref = &l;
 		}
-		RETVAL = SvREFCNT_inc(*ref);
+		RETVAL = (AV*)SvREFCNT_inc(*ref);
 	OUTPUT: RETVAL
 
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
