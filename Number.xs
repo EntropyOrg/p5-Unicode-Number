@@ -50,7 +50,7 @@ version(Unicode::Number self)
 
 # retrieves number systems
 # and caches the result
-SV*
+AV*
 list_number_systems(Unicode::Number self)
 	INIT:
 		AV* l;
