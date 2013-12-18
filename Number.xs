@@ -99,7 +99,7 @@ MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 Unicode::Number::System
 _new(const char* class, int ns, char* string, int both_dir)
 	INIT:
-		Unicode::Number::System hash;
+		Unicode__Number__System hash;
 	CODE:
 		hash = newHV(); /* Create a hash */
 
