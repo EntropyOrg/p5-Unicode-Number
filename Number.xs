@@ -45,6 +45,8 @@ version(SV *self)
 		RETVAL = uninum_version();
 	OUTPUT: RETVAL
 
+	/* retrieves number systems
+	 * and caches the result */
 SV*
 list_number_systems(SV* self)
 	INIT:
@@ -53,6 +55,7 @@ list_number_systems(SV* self)
 		int ns_num;
 		size_t len;
 		SV** ref;
+		int i;
 	CODE:
 		HV* hash = (HV*)SvRV(self);
 		if( NULL == (ref = hv_fetchs(hash, "_list_ns_cache", 0)) ) {
@@ -63,7 +66,7 @@ list_number_systems(SV* self)
 			 * which = 0 : get number systems that can only be used from string
 			 *             to numbers
 			 */
-			for(int which = 0; which <= 1; which++ ) {
+			for(which = 0; which <= 1; which++ ) {
 				while (ns_str = ListNumberSystems(1,which)) {
 					HV * rh;
 					rh = (HV *)sv_2mortal((SV *)newHV());
