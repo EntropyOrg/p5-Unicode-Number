@@ -55,7 +55,7 @@ list_number_systems(SV* self)
 		int ns_num;
 		size_t len;
 		SV** ref;
-		int i;
+		int which;
 	CODE:
 		HV* hash = (HV*)SvRV(self);
 		if( NULL == (ref = hv_fetchs(hash, "_list_ns_cache", 0)) ) {
