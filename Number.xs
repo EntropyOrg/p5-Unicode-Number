@@ -43,7 +43,7 @@ int uninum_is_ok() {
 MODULE = Unicode::Number      PACKAGE = Unicode::Number
 
 const char*
-version(SV *self)
+version(Unicode::Number *self)
 	CODE:
 		RETVAL = uninum_version();
 	OUTPUT: RETVAL
