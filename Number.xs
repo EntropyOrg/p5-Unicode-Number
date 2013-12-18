@@ -15,8 +15,8 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
-/*typedef SV* Unicode__Number;*/
-/*typedef SV* Unicode__Number__System;*/
+typedef SV* Unicode__Number;
+typedef SV* Unicode__Number__System;
 
 const char* uninum_error_str() {
 	switch(uninum_err) {
