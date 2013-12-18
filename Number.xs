@@ -99,7 +99,7 @@ MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 Unicode::Number::System
 _new(const char* class, int ns, char* string, int both_dir)
 	CODE:
-		HV* hash = newHV(); /* Create a hash */
+		Unicode::Number::System hash = newHV(); /* Create a hash */
 
 		/* Create a reference to the hash */
 		SV *const self = newRV_noinc( (SV *)hash );
