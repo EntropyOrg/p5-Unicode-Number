@@ -1,2 +1,2 @@
-Unicode::Number            T_SV
-Unicode::Number::System    T_SV
+Unicode::Number            T_HV
+Unicode::Number::System    T_HV
