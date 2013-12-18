@@ -45,6 +45,9 @@ version(SV *self)
 		RETVAL = uninum_version();
 	OUTPUT: RETVAL
 
+/* retrieves number systems
+ * and caches the result
+ */
 SV*
 list_number_systems(SV* self)
 	INIT:
@@ -52,17 +55,30 @@ list_number_systems(SV* self)
 		char* ns_str;
 		int ns_num;
 		size_t len;
+		SV** ref;
 	CODE:
-		l = (AV *)sv_2mortal((SV *)newAV());
-		while (ns_str = ListNumberSystems(1,0)) {
-			HV * rh;
-			rh = (HV *)sv_2mortal((SV *)newHV());
-			ns_num = StringToNumberSystem(ns_str);
-			len = strlen(ns_str);
-			hv_stores(rh, "s", newSVpv(ns_str, len));
-			hv_stores(rh, "n", newSViv(ns_num));
-			av_push(l, newRV((SV *)rh));
+		HV* hash = (HV*)SvRV(self);
+		if( NULL == (ref = hv_fetchs(hash, "_list_ns_cache", 0)) ) {
+			/* not cached yet */
+			l = (AV *)sv_2mortal((SV *)newAV());
+			while (ns_str = ListNumberSystems(1,0)) {
+				HV * rh;
+				rh = (HV *)sv_2mortal((SV *)newHV());
+
+				/* get the ID for the number system */
+				ns_num = StringToNumberSystem(ns_str);
+
+				/* store in hash { s => $str, n => $id } */
+				len = strlen(ns_str);
+				hv_stores(rh, "s", newSVpv(ns_str, len));
+				hv_stores(rh, "n", newSViv(ns_num));
+
+				av_push(l, newRV((SV *)rh)); /* and add to list */
+			}
+			ListNumberSystems(0,0); /* Reset */
+			SV* l_ref = newRV((SV *)l);
+			hv_stores(hash, "_list_ns_cache", l_ref);
+			ref = &l_ref;
 		}
-		ListNumberSystems(0,0); /* Reset */
-		RETVAL = newRV((SV *)l);
+		RETVAL = newRV(*ref);
 	OUTPUT: RETVAL
