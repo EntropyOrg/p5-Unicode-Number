@@ -86,7 +86,7 @@ list_number_systems(Unicode::Number self)
 					XPUSHs(sv_2mortal(newSVpvs("Unicode::Number::System")));
 					XPUSHs(sv_2mortal(newSVpv(ns_str, len)));
 					XPUSHs(sv_2mortal(newSViv(ns_num)));
-					XPUSHs(sv_2mortal(newSViv( !which )));
+					XPUSHs(sv_2mortal(boolSV( !which )));
 					PUTBACK;
 					count = call_pv("Unicode::Number::System::_new", G_SCALAR);
 					SPAGAIN;
@@ -129,7 +129,7 @@ _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 		len = strlen(ns_str);
 		hv_stores(hash, "_name", newSVpv(ns_str, len));
 		hv_stores(hash, "_id", newSViv(ns_num));
-		hv_stores(hash, "_both_dir", newSViv( both_dir ));
+		hv_stores(hash, "_both_dir", boolSV( both_dir ));
 
 		/* bless into the proper package */
 		RETVAL = sv_bless( self, gv_stashpv( class, 0 ) );
@@ -142,14 +142,14 @@ name(Unicode::Number::System self)
 		RETVAL = hv_fetchs(self, "_name", 0);
 	OUTPUT: RETVAL
 
-int
+IV*
 _id(Unicode::Number::System self)
 	CODE:
-		RETVAL = hv_fetchs(self, "_id", 0);
+		RETVAL = (IV*) hv_fetchs(self, "_id", 0);
 	OUTPUT: RETVAL
 
-bool
+SV*
 convertible_in_both_directions(Unicode::Number::System self)
 	CODE:
-		RETVAL = hv_fetchs(self, "_both_dir", 0);
+		RETVAL = *hv_fetchs(self, "_both_dir", 0);
 	OUTPUT: RETVAL
