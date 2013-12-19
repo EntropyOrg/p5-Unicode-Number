@@ -88,7 +88,7 @@ list_number_systems(Unicode::Number self)
 					XPUSHs(sv_2mortal(newSViv(ns_num)));
 					XPUSHs(sv_2mortal(newSViv( !which )));
 					PUTBACK;
-					count = call_pv("Unicode::Number::System::_new", G_SCALAR);
+					count = call_pv("_new", G_SCALAR);
 					SPAGAIN;
 					if (count != 1)
 						croak("Big trouble\n");
@@ -122,7 +122,9 @@ _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 
 		/* Create a reference to the hash */
 		SV *const self = newRV_noinc( (SV *)hash );
-		/* store in hash { s => $str, n => $id } */
+		/* store in hash
+		 * { _name => $ns_str, _id => $ns_num, _both_dir => $both_dir }
+		 */
 		len = strlen(ns_str);
 		hv_stores(hash, "_name", newSVpv(ns_str, len));
 		hv_stores(hash, "_id", newSViv(ns_num));
@@ -146,7 +148,7 @@ _id(Unicode::Number::System self)
 	OUTPUT: RETVAL
 
 bool
-covertible_in_both_directions(Unicode::Number::System self)
+convertible_in_both_directions(Unicode::Number::System self)
 	CODE:
 		RETVAL = hv_fetchs(self, "_both_dir", 0);
 	OUTPUT: RETVAL
