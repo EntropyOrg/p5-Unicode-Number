@@ -83,6 +83,7 @@ list_number_systems(Unicode::Number self)
 					ENTER;
 					SAVETMPS;
 					PUSHMARK(SP);
+					XPUSHs(sv_2mortal(newSVpvs("Unicode::Number::System")));
 					XPUSHs(sv_2mortal(newSVpv(ns_str, len)));
 					XPUSHs(sv_2mortal(newSViv(ns_num)));
 					XPUSHs(sv_2mortal(newSViv( !which )));
