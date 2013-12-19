@@ -98,7 +98,7 @@ list_number_systems(Unicode::Number self)
 					if (count != 1)
 						croak("Big trouble\n");
 					SV* s = POPs;
-					rh = (HV*)SvREFCNT_inc(s);
+					rh = (HV*)(s);
 					PUTBACK;
 					FREETMPS;
 					LEAVE;

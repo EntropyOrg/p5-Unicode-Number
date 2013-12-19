@@ -14,7 +14,7 @@ is( @$ns, 91, 'count of number systems' );
 my $g = $ns->[0];
 use DDP; p $g;
 
-is( ${$ns->[0]}->name, 'Aegean');
+is( $ns->[0]->name, 'Aegean');
 is( $ns->[0]->_id, 1);
 ok( $ns->[0]->convertible_in_both_directions );
 
