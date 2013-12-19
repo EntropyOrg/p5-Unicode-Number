@@ -64,6 +64,9 @@ list_number_systems(Unicode::Number self)
 		if( NULL == (ref = (AV**)hv_fetchs(self, "_list_ns_cache", 0)) ) {
 			dSP;
 			EXTEND(SP, 3);
+			SV* sv_uns_package = sv_2mortal(newSVpvs("Unicode::Number::System"));
+			SV* sv_ns_str = sv_2mortal(newSVpv("", 0));
+			SV* sv_ns_num = sv_2mortal(newSViv(0));
 			/* not cached yet */
 			l = (AV *)sv_2mortal((SV *)newAV());
 			/* which = 1 : get all number systems that can be used in both
@@ -77,14 +80,17 @@ list_number_systems(Unicode::Number self)
 
 					/* get the ID for the number system */
 					ns_num = StringToNumberSystem(ns_str);
+
 					len = strlen(ns_str);
+					sv_setpvn(sv_ns_str, ns_str, len);
+					sv_setiv(sv_ns_num, ns_num);
 
 					ENTER;
 					SAVETMPS;
 					PUSHMARK(SP);
-					PUSHs(sv_2mortal(newSVpvs("Unicode::Number::System")));
-					PUSHs(sv_2mortal(newSVpv(ns_str, len)));
-					PUSHs(sv_2mortal(newSViv(ns_num)));
+					PUSHs(sv_uns_package);
+					PUSHs(sv_ns_str);
+					PUSHs(sv_ns_num);
 					PUSHs(boolSV( !which ));
 					PUTBACK;
 					count = call_pv("Unicode::Number::System::_new", G_SCALAR);
