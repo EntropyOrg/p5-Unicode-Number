@@ -113,7 +113,7 @@ list_number_systems(Unicode::Number self)
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 
 Unicode::Number::System
-_new(const char* class, char* ns_str, int ns_num, int both_dir)
+_new(const char* class, char* ns_str, int ns_num, bool both_dir)
 	INIT:
 		Unicode__Number__System hash;
 		size_t len;
@@ -124,9 +124,9 @@ _new(const char* class, char* ns_str, int ns_num, int both_dir)
 		SV *const self = newRV_noinc( (SV *)hash );
 		/* store in hash { s => $str, n => $id } */
 		len = strlen(ns_str);
-		hv_stores(hash, "s", newSVpv(ns_str, len));
-		hv_stores(hash, "n", newSViv(ns_num));
-		hv_stores(hash, "both_dir", newSViv( both_dir ));
+		hv_stores(hash, "_name", newSVpv(ns_str, len));
+		hv_stores(hash, "_id", newSViv(ns_num));
+		hv_stores(hash, "_both_dir", newSViv( both_dir ));
 
 		/* bless into the proper package */
 		RETVAL = sv_bless( self, gv_stashpv( class, 0 ) );
@@ -134,8 +134,19 @@ _new(const char* class, char* ns_str, int ns_num, int both_dir)
 
 
 const char*
-name(const char* class)
+name(Unicode::Number::System self)
 	CODE:
-		RETVAL = "test";
+		RETVAL = hv_fetchs(self, "_name");
 	OUTPUT: RETVAL
 
+const char*
+_id(Unicode::Number::System self)
+	CODE:
+		RETVAL = hv_fetchs(self, "_id");
+	OUTPUT: RETVAL
+
+bool
+covertible_in_both_directions(Unicode::Number::System self)
+	CODE:
+		RETVAL = hv_fetchs(self, "_both_dir");
+	OUTPUT: RETVAL
