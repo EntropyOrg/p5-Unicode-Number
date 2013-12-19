@@ -74,7 +74,6 @@ list_number_systems(Unicode::Number self)
 			for(which = 0; which <= 1; which++ ) {
 				while (ns_str = ListNumberSystems(1,which)) {
 					HV * rh;
-					rh = (HV *)sv_2mortal((SV *)newHV());
 
 					/* get the ID for the number system */
 					ns_num = StringToNumberSystem(ns_str);
@@ -99,7 +98,7 @@ list_number_systems(Unicode::Number self)
 					LEAVE;
 
 
-					av_push(l, SvREFCNT_inc((SV *)rh)); /* and add to list */
+					av_push(l, (SV *)rh); /* and add to list */
 				}
 				ListNumberSystems(0,0); /* Reset */
 			}
