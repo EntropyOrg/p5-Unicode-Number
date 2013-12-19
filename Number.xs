@@ -103,9 +103,7 @@ list_number_systems(Unicode::Number self)
 				}
 				ListNumberSystems(0,0); /* Reset */
 			}
-			SV* l_ref = newRV_inc((SV *)l);
-			SvREFCNT_inc((SV*) l);
-			hv_stores(self, "_list_ns_cache", (SV*)l);
+			hv_stores(self, "_list_ns_cache", SvREFCNT_inc((SV*) l););
 			ref = &l;
 		}
 		RETVAL = (AV*)SvREFCNT_inc(*ref);
