@@ -142,7 +142,7 @@ name(Unicode::Number::System self)
 		RETVAL = hv_fetchs(self, "_name", 0);
 	OUTPUT: RETVAL
 
-IV*
+int
 _id(Unicode::Number::System self)
 	CODE:
 		RETVAL = (IV*) hv_fetchs(self, "_id", 0);
