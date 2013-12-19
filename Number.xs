@@ -135,7 +135,7 @@ _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 		hv_stores(hash, "_both_dir", boolSV( both_dir ));
 
 		/* bless into the proper package */
-		RETVAL = (HV*)sv_bless( self, gv_stashpv( class, 0 ) );
+		RETVAL = (SV*)sv_bless( self, gv_stashpv( class, 0 ) );
 	OUTPUT: RETVAL
 
 
