@@ -116,7 +116,7 @@ list_number_systems(Unicode::Number self)
 
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 
-Unicode::Number::System
+SV*
 _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 	INIT:
 		Unicode__Number__System hash;
