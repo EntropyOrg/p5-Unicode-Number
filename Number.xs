@@ -55,10 +55,11 @@ list_number_systems(Unicode::Number self)
 	INIT:
 		AV* l;
 		char* ns_str;
-		int ns_num;
 		size_t len;
+		int ns_num;
 		AV** ref;
 		int which;
+		int count;
 	CODE:
 		if( NULL == (ref = (AV**)hv_fetchs(self, "_list_ns_cache", 0)) ) {
 			/* not cached yet */
@@ -75,12 +76,27 @@ list_number_systems(Unicode::Number self)
 
 					/* get the ID for the number system */
 					ns_num = StringToNumberSystem(ns_str);
-
-					/* store in hash { s => $str, n => $id } */
+					size_t len;
 					len = strlen(ns_str);
-					hv_stores(rh, "s", newSVpv(ns_str, len));
-					hv_stores(rh, "n", newSViv(ns_num));
-					hv_stores(rh, "both_dir", newSViv( !which ));
+
+					dSP;
+					ENTER;
+					SAVETMPS;
+					PUSHMARK(SP);
+					XPUSHs(sv_2mortal(newSVpvs("Unicode::Number::System")));
+					XPUSHs(sv_2mortal(newSVpv(ns_str, len)));
+					XPUSHs(sv_2mortal(newSViv(ns_num)));
+					XPUSHs(sv_2mortal(newSViv( !which )));
+					PUTBACK;
+					count = call_pv("Unicode::Number::System::_new", G_SCALAR);
+					SPAGAIN;
+					if (count != 1)
+						croak("Big trouble\n");
+					rh = (HV*)SvREFCNT_inc(POPs);
+					PUTBACK;
+					FREETMPS;
+					LEAVE;
+
 
 					av_push(l, newRV((SV *)rh)); /* and add to list */
 				}
@@ -97,14 +113,22 @@ list_number_systems(Unicode::Number self)
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 
 Unicode::Number::System
-_new(const char* class, int ns, char* string, int both_dir)
+_new(const char* class, char* ns_str, int ns_num, bool both_dir)
 	INIT:
 		Unicode__Number__System hash;
+		size_t len;
 	CODE:
 		hash = newHV(); /* Create a hash */
 
 		/* Create a reference to the hash */
 		SV *const self = newRV_noinc( (SV *)hash );
+		/* store in hash
+		 * { _name => $ns_str, _id => $ns_num, _both_dir => $both_dir }
+		 */
+		len = strlen(ns_str);
+		hv_stores(hash, "_name", newSVpv(ns_str, len));
+		hv_stores(hash, "_id", newSViv(ns_num));
+		hv_stores(hash, "_both_dir", newSViv( both_dir ));
 
 		/* bless into the proper package */
 		RETVAL = sv_bless( self, gv_stashpv( class, 0 ) );
@@ -112,8 +136,19 @@ _new(const char* class, int ns, char* string, int both_dir)
 
 
 const char*
-name(const char* class)
+name(Unicode::Number::System self)
 	CODE:
-		RETVAL = "test";
+		RETVAL = hv_fetchs(self, "_name", 0);
 	OUTPUT: RETVAL
 
+const char*
+_id(Unicode::Number::System self)
+	CODE:
+		RETVAL = hv_fetchs(self, "_id", 0);
+	OUTPUT: RETVAL
+
+bool
+convertible_in_both_directions(Unicode::Number::System self)
+	CODE:
+		RETVAL = hv_fetchs(self, "_both_dir", 0);
+	OUTPUT: RETVAL
