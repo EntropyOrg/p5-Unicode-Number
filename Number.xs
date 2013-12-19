@@ -99,7 +99,7 @@ list_number_systems(Unicode::Number self)
 					LEAVE;
 
 
-					av_push(l, newRV_inc((SV *)rh)); /* and add to list */
+					av_push(l, (SV *)rh); /* and add to list */
 				}
 				ListNumberSystems(0,0); /* Reset */
 			}
