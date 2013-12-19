@@ -109,7 +109,7 @@ list_number_systems(Unicode::Number self)
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 
 Unicode::Number::System
-_new(const char* class, int ns, char* string, int both_dir)
+_new(const char* class, char* ns_str, int ns_num, int both_dir)
 	INIT:
 		Unicode__Number__System hash;
 	CODE:
