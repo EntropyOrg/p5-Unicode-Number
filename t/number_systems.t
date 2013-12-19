@@ -10,6 +10,7 @@ use DDP; p $ns;
 
 is( @$ns, 91, 'count of number systems' );
 
+use DDP; p $ns->[0];
 is( $ns->[0]->name, 'Aegean');
 is( $ns->[0]->_id, 1);
 ok( $ns->[0]->convertible_in_both_directions );
