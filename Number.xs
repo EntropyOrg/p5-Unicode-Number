@@ -15,8 +15,8 @@
 #include <nsdefs.h>
 #include <uninum.h>
 
-typedef HV* Unicode__Number;
-typedef HV* Unicode__Number__System;
+typedef HV* Unicode__Number;          /* Unicode::Number */
+typedef HV* Unicode__Number__System;  /* Unicode::Number::System */
 
 const char* uninum_error_str() {
 	switch(uninum_err) {
@@ -117,25 +117,26 @@ list_number_systems(Unicode::Number self)
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 
 SV*
-_new(const char* class, char* ns_str, int ns_num, bool both_dir)
+_new(SV* klass, SV* ns_str, int ns_num, bool both_dir)
 	INIT:
 		Unicode__Number__System hash;
 		size_t len;
 	CODE:
 		hash = newHV(); /* Create a hash */
-
-		/* Create a reference to the hash */
-		SV *const self = newRV_noinc( (SV *)hash );
 		/* store in hash
 		 * { _name => $ns_str, _id => $ns_num, _both_dir => $both_dir }
 		 */
 		len = strlen(ns_str);
-		hv_stores(hash, "_name", newSVpv(ns_str, len));
-		hv_stores(hash, "_id", newSViv(ns_num));
-		hv_stores(hash, "_both_dir", boolSV( both_dir ));
+		hv_stores(hash, "_name", SvPV(ns_str, len)); /* string with the name of
+														number system */
+		hv_stores(hash, "_id", newSViv(ns_num));  /* this is a numeric ID */
+		hv_stores(hash, "_both_dir", boolSV( both_dir )); /* can be converted
+															 back? */
 
+		/* Create a reference to the hash */
+		SV *const self = newRV_noinc( (SV *)hash );
 		/* bless into the proper package */
-		RETVAL = (SV*)sv_bless( self, gv_stashpv( class, 0 ) );
+		RETVAL = (SV*)sv_bless( self, gv_stashsv( klass, 0 ) );
 	OUTPUT: RETVAL
 
 
