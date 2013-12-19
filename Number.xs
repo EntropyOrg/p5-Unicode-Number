@@ -59,6 +59,7 @@ list_number_systems(Unicode::Number self)
 		size_t len;
 		AV** ref;
 		int which;
+		int count;
 	CODE:
 		if( NULL == (ref = (AV**)hv_fetchs(self, "_list_ns_cache", 0)) ) {
 			/* not cached yet */
@@ -84,7 +85,7 @@ list_number_systems(Unicode::Number self)
 					XPUSHs(sv_2mortal(newSViv(ns_num)));
 					XPUSHs(sv_2mortal(newSViv( !which )));
 					PUTBACK;
-					call_pv("Unicode::Number::System::_new", G_SCALAR);
+					count = call_pv("Unicode::Number::System::_new", G_SCALAR);
 					SPAGAIN;
 					if (count != 1)
 						croak("Big trouble\n");
