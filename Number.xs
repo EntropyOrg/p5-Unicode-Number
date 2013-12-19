@@ -76,7 +76,7 @@ list_number_systems(Unicode::Number self)
 			 */
 			for(which = 0; which <= 1; which++ ) {
 				while (ns_str = ListNumberSystems(1,which)) {
-					HV * rh;
+					SV * rh;
 
 					/* get the ID for the number system */
 					ns_num = StringToNumberSystem(ns_str);
@@ -98,7 +98,7 @@ list_number_systems(Unicode::Number self)
 					if (count != 1)
 						croak("Big trouble\n");
 					SV* s = POPs;
-					rh = (HV*)(s);
+					rh = (SV*)SvREFCNT_inc(s);
 					PUTBACK;
 					FREETMPS;
 					LEAVE;
