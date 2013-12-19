@@ -6,12 +6,11 @@ my $uni = Unicode::Number->new();
 
 my $ns = $uni->list_number_systems();
 
-use DDP; p $ns;
-
 is( @$ns, 91, 'count of number systems' );
 
 
-my $g = $ns->[0];
+#my $g = $ns->[0];
+my $g = Unicode::Number::System->new("A", 1, 1);
 use DDP; p $g;
 
 is( $ns->[0]->name, 'Aegean');
