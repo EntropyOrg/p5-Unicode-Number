@@ -139,13 +139,13 @@ _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 const char*
 name(Unicode::Number::System self)
 	CODE:
-		RETVAL = hv_fetchs(self, "_name", 0);
+		RETVAL = *hv_fetchs(self, "_name", 0);
 	OUTPUT: RETVAL
 
-int
+SV*
 _id(Unicode::Number::System self)
 	CODE:
-		RETVAL = (IV*) hv_fetchs(self, "_id", 0);
+		RETVAL = *hv_fetchs(self, "_id", 0);
 	OUTPUT: RETVAL
 
 SV*
