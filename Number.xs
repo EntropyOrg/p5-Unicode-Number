@@ -91,7 +91,7 @@ list_number_systems(Unicode::Number self)
 					SPAGAIN;
 					if (count != 1)
 						croak("Big trouble\n");
-					rh = SvREFCNT_inc(POPs);
+					rh = (HV*)SvREFCNT_inc(POPs);
 					PUTBACK;
 					FREETMPS;
 					LEAVE;
