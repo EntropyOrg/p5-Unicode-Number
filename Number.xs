@@ -72,37 +72,38 @@ list_number_systems(Unicode::Number self)
 			for(which = 0; which <= 1; which++ ) {
 				while (ns_str = ListNumberSystems(1,which)) {
 					HV * rh;
+					dSP;
+					EXTEND(SP, 3);
 					rh = (HV *)sv_2mortal((SV *)newHV());
 
 					/* get the ID for the number system */
 					ns_num = StringToNumberSystem(ns_str);
-					size_t len;
 					len = strlen(ns_str);
 
-					dSP;
 					ENTER;
 					SAVETMPS;
 					PUSHMARK(SP);
 					XPUSHs(sv_2mortal(newSVpvs("Unicode::Number::System")));
 					XPUSHs(sv_2mortal(newSVpv(ns_str, len)));
 					XPUSHs(sv_2mortal(newSViv(ns_num)));
-					XPUSHs(sv_2mortal(newSViv( !which )));
+					XPUSHs(sv_2mortal(boolSV( !which )));
 					PUTBACK;
 					count = call_pv("Unicode::Number::System::_new", G_SCALAR);
 					SPAGAIN;
 					if (count != 1)
 						croak("Big trouble\n");
-					rh = (HV*)SvREFCNT_inc(POPs);
+					SV* s = POPs;
+					rh = (HV*)SvREFCNT_inc(s);
 					PUTBACK;
 					FREETMPS;
 					LEAVE;
 
 
-					av_push(l, newRV((SV *)rh)); /* and add to list */
+					av_push(l, newRV_inc((SV *)rh)); /* and add to list */
 				}
 				ListNumberSystems(0,0); /* Reset */
 			}
-			SV* l_ref = newRV((SV *)l);
+			SV* l_ref = newRV_inc((SV *)l);
 			SvREFCNT_inc((SV*) l);
 			hv_stores(self, "_list_ns_cache", (SV*)l);
 			ref = &l;
@@ -128,27 +129,27 @@ _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 		len = strlen(ns_str);
 		hv_stores(hash, "_name", newSVpv(ns_str, len));
 		hv_stores(hash, "_id", newSViv(ns_num));
-		hv_stores(hash, "_both_dir", newSViv( both_dir ));
+		hv_stores(hash, "_both_dir", boolSV( both_dir ));
 
 		/* bless into the proper package */
-		RETVAL = sv_bless( self, gv_stashpv( class, 0 ) );
+		RETVAL = (HV*)sv_bless( self, gv_stashpv( class, 0 ) );
 	OUTPUT: RETVAL
 
 
-const char*
+SV*
 name(Unicode::Number::System self)
 	CODE:
-		RETVAL = hv_fetchs(self, "_name", 0);
+		RETVAL = *hv_fetchs(self, "_name", 0);
 	OUTPUT: RETVAL
 
-const char*
+SV*
 _id(Unicode::Number::System self)
 	CODE:
-		RETVAL = hv_fetchs(self, "_id", 0);
+		RETVAL = *hv_fetchs(self, "_id", 0);
 	OUTPUT: RETVAL
 
-bool
+SV*
 convertible_in_both_directions(Unicode::Number::System self)
 	CODE:
-		RETVAL = hv_fetchs(self, "_both_dir", 0);
+		RETVAL = *hv_fetchs(self, "_both_dir", 0);
 	OUTPUT: RETVAL
