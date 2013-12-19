@@ -62,6 +62,11 @@ list_number_systems(Unicode::Number self)
 		int count;
 	CODE:
 		if( NULL == (ref = (AV**)hv_fetchs(self, "_list_ns_cache", 0)) ) {
+			dSP;
+			EXTEND(SP, 4);
+			SV* sv_uns_package = sv_2mortal(newSVpvs("Unicode::Number::System"));
+			SV* sv_ns_str = sv_2mortal(newSVpv("", 0));
+			SV* sv_ns_num = sv_2mortal(newSViv(0));
 			/* not cached yet */
 			l = (AV *)sv_2mortal((SV *)newAV());
 			/* which = 1 : get all number systems that can be used in both
@@ -72,40 +77,38 @@ list_number_systems(Unicode::Number self)
 			for(which = 0; which <= 1; which++ ) {
 				while (ns_str = ListNumberSystems(1,which)) {
 					HV * rh;
-					dSP;
-					EXTEND(SP, 3);
-					rh = (HV *)sv_2mortal((SV *)newHV());
 
 					/* get the ID for the number system */
 					ns_num = StringToNumberSystem(ns_str);
+
 					len = strlen(ns_str);
+					sv_setpvn(sv_ns_str, ns_str, len);
+					sv_setiv(sv_ns_num, ns_num);
 
 					ENTER;
 					SAVETMPS;
 					PUSHMARK(SP);
-					XPUSHs(sv_2mortal(newSVpvs("Unicode::Number::System")));
-					XPUSHs(sv_2mortal(newSVpv(ns_str, len)));
-					XPUSHs(sv_2mortal(newSViv(ns_num)));
-					XPUSHs(sv_2mortal(boolSV( !which )));
+					PUSHs(sv_uns_package);
+					PUSHs(sv_ns_str);
+					PUSHs(sv_ns_num);
+					PUSHs(boolSV( !which ));
 					PUTBACK;
 					count = call_pv("Unicode::Number::System::_new", G_SCALAR);
 					SPAGAIN;
 					if (count != 1)
 						croak("Big trouble\n");
-					SV* s = POPs;
-					rh = (HV*)SvREFCNT_inc(s);
+					rh = (HV*) POPs;
+					SvREFCNT_inc(rh);
 					PUTBACK;
 					FREETMPS;
 					LEAVE;
 
 
-					av_push(l, newRV_inc((SV *)rh)); /* and add to list */
+					av_push(l, (SV *)rh); /* and add to list */
 				}
 				ListNumberSystems(0,0); /* Reset */
 			}
-			SV* l_ref = newRV_inc((SV *)l);
-			SvREFCNT_inc((SV*) l);
-			hv_stores(self, "_list_ns_cache", (SV*)l);
+			hv_stores(self, "_list_ns_cache", SvREFCNT_inc((SV*) l));
 			ref = &l;
 		}
 		RETVAL = (AV*)SvREFCNT_inc(*ref);
@@ -113,7 +116,7 @@ list_number_systems(Unicode::Number self)
 
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 
-Unicode::Number::System
+SV*
 _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 	INIT:
 		Unicode__Number__System hash;
@@ -132,24 +135,24 @@ _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 		hv_stores(hash, "_both_dir", boolSV( both_dir ));
 
 		/* bless into the proper package */
-		RETVAL = (HV*)sv_bless( self, gv_stashpv( class, 0 ) );
+		RETVAL = (SV*)sv_bless( self, gv_stashpv( class, 0 ) );
 	OUTPUT: RETVAL
 
 
 SV*
 name(Unicode::Number::System self)
 	CODE:
-		RETVAL = *hv_fetchs(self, "_name", 0);
+		RETVAL = SvREFCNT_inc(*hv_fetchs(self, "_name", 0));
 	OUTPUT: RETVAL
 
 SV*
 _id(Unicode::Number::System self)
 	CODE:
-		RETVAL = *hv_fetchs(self, "_id", 0);
+		RETVAL = SvREFCNT_inc(*hv_fetchs(self, "_id", 0));
 	OUTPUT: RETVAL
 
 SV*
 convertible_in_both_directions(Unicode::Number::System self)
 	CODE:
-		RETVAL = *hv_fetchs(self, "_both_dir", 0);
+		RETVAL = SvREFCNT_inc(*hv_fetchs(self, "_both_dir", 0));
 	OUTPUT: RETVAL
