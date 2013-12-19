@@ -104,7 +104,7 @@ list_number_systems(Unicode::Number self)
 					LEAVE;
 
 
-					av_push(l, SvREFCNT_inc((SV *)rh)); /* and add to list */
+					av_push(l, (SV *)rh); /* and add to list */
 				}
 				ListNumberSystems(0,0); /* Reset */
 			}
@@ -125,7 +125,7 @@ _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 		hash = newHV(); /* Create a hash */
 
 		/* Create a reference to the hash */
-		SV *const self = newRV_inc( (SV *)hash );
+		SV *const self = newRV_noinc( (SV *)hash );
 		/* store in hash
 		 * { _name => $ns_str, _id => $ns_num, _both_dir => $both_dir }
 		 */
