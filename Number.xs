@@ -55,6 +55,7 @@ list_number_systems(Unicode::Number self)
 	INIT:
 		AV* l;
 		char* ns_str;
+		size_t len;
 		int ns_num;
 		AV** ref;
 		int which;
@@ -75,6 +76,8 @@ list_number_systems(Unicode::Number self)
 
 					/* get the ID for the number system */
 					ns_num = StringToNumberSystem(ns_str);
+					size_t len;
+					len = strlen(ns_str);
 
 					dSP;
 					ENTER;
