@@ -56,7 +56,6 @@ list_number_systems(Unicode::Number self)
 		AV* l;
 		char* ns_str;
 		int ns_num;
-		size_t len;
 		AV** ref;
 		int which;
 		int count;
@@ -113,6 +112,7 @@ Unicode::Number::System
 _new(const char* class, char* ns_str, int ns_num, int both_dir)
 	INIT:
 		Unicode__Number__System hash;
+		size_t len;
 	CODE:
 		hash = newHV(); /* Create a hash */
 
