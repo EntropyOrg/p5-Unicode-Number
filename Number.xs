@@ -50,7 +50,7 @@ version(Unicode::Number self)
 
 # retrieves number systems as an array
 # and caches the result
-AV*
+SV*
 list_number_systems(Unicode::Number self)
 	INIT:
 		AV* l;
@@ -111,7 +111,7 @@ list_number_systems(Unicode::Number self)
 			hv_stores(self, "_list_ns_cache", SvREFCNT_inc((SV*) l));
 			ref = &l;
 		}
-		RETVAL = (AV*)SvREFCNT_inc(*ref);
+		RETVAL = SvREFCNT_inc(*ref);
 	OUTPUT: RETVAL
 
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
