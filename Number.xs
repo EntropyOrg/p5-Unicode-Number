@@ -136,7 +136,7 @@ _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 	OUTPUT: RETVAL
 
 
-const char*
+SV*
 name(Unicode::Number::System self)
 	CODE:
 		RETVAL = *hv_fetchs(self, "_name", 0);
