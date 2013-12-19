@@ -16,4 +16,6 @@ is( $ns->[-1]->name, 'Western');
 is( $ns->[-1]->_id, 120);
 not( $ns->[-1]->convertible_in_both_directions );
 
+is_deeply( $ns, $uni->list_number_systems );
+
 done_testing;
