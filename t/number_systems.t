@@ -11,8 +11,8 @@ is( @$ns, 91, 'count of number systems' );
 
 #my $g = $ns->[0];
 my $g = Unicode::Number::System->_new("A", 1, 1);
-#use DDP; p $g;
-#use DDP; p $g->name;
+use DDP; p $g;
+use DDP; p $g->name;
 
 is( $ns->[0]->name, 'Aegean');
 is( $ns->[0]->_id, 1);

@@ -142,17 +142,17 @@ _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 SV*
 name(Unicode::Number::System self)
 	CODE:
-		RETVAL = *hv_fetchs(self, "_name", 0);
+		RETVAL = SvREFCNT_inc(*hv_fetchs(self, "_name", 0));
 	OUTPUT: RETVAL
 
 SV*
 _id(Unicode::Number::System self)
 	CODE:
-		RETVAL = *hv_fetchs(self, "_id", 0);
+		RETVAL = SvREFCNT_inc(*hv_fetchs(self, "_id", 0));
 	OUTPUT: RETVAL
 
 SV*
 convertible_in_both_directions(Unicode::Number::System self)
 	CODE:
-		RETVAL = *hv_fetchs(self, "_both_dir", 0);
+		RETVAL = SvREFCNT_inc(*hv_fetchs(self, "_both_dir", 0));
 	OUTPUT: RETVAL
