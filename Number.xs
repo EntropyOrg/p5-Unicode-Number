@@ -72,14 +72,14 @@ list_number_systems(Unicode::Number self)
 			for(which = 0; which <= 1; which++ ) {
 				while (ns_str = ListNumberSystems(1,which)) {
 					HV * rh;
+					dSP;
+					EXTEND(SP, 3);
 					rh = (HV *)sv_2mortal((SV *)newHV());
 
 					/* get the ID for the number system */
 					ns_num = StringToNumberSystem(ns_str);
-					size_t len;
 					len = strlen(ns_str);
 
-					dSP;
 					ENTER;
 					SAVETMPS;
 					PUSHMARK(SP);
@@ -92,17 +92,18 @@ list_number_systems(Unicode::Number self)
 					SPAGAIN;
 					if (count != 1)
 						croak("Big trouble\n");
+					SV* s = POPs;
 					rh = (HV*)SvREFCNT_inc(POPs);
 					PUTBACK;
 					FREETMPS;
 					LEAVE;
 
 
-					av_push(l, newRV((SV *)rh)); /* and add to list */
+					av_push(l, newRV_inc((SV *)rh)); /* and add to list */
 				}
 				ListNumberSystems(0,0); /* Reset */
 			}
-			SV* l_ref = newRV((SV *)l);
+			SV* l_ref = newRV_inc((SV *)l);
 			SvREFCNT_inc((SV*) l);
 			hv_stores(self, "_list_ns_cache", (SV*)l);
 			ref = &l;
