@@ -136,17 +136,17 @@ _new(const char* class, char* ns_str, int ns_num, bool both_dir)
 const char*
 name(Unicode::Number::System self)
 	CODE:
-		RETVAL = hv_fetchs(self, "_name");
+		RETVAL = hv_fetchs(self, "_name", 0);
 	OUTPUT: RETVAL
 
 const char*
 _id(Unicode::Number::System self)
 	CODE:
-		RETVAL = hv_fetchs(self, "_id");
+		RETVAL = hv_fetchs(self, "_id", 0);
 	OUTPUT: RETVAL
 
 bool
 covertible_in_both_directions(Unicode::Number::System self)
 	CODE:
-		RETVAL = hv_fetchs(self, "_both_dir");
+		RETVAL = hv_fetchs(self, "_both_dir", 0);
 	OUTPUT: RETVAL
