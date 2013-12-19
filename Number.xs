@@ -48,7 +48,7 @@ version(Unicode::Number self)
 		RETVAL = uninum_version();
 	OUTPUT: RETVAL
 
-# retrieves number systems
+# retrieves number systems as an array
 # and caches the result
 AV*
 list_number_systems(Unicode::Number self)
@@ -76,11 +76,23 @@ list_number_systems(Unicode::Number self)
 					/* get the ID for the number system */
 					ns_num = StringToNumberSystem(ns_str);
 
-					/* store in hash { s => $str, n => $id } */
-					len = strlen(ns_str);
-					hv_stores(rh, "s", newSVpv(ns_str, len));
-					hv_stores(rh, "n", newSViv(ns_num));
-					hv_stores(rh, "both_dir", newSViv( !which ));
+					dSP;
+					ENTER;
+					SAVETMPS;
+					PUSHMARK(SP);
+					XPUSHs(sv_2mortal(newSVpv(ns_str, len)));
+					XPUSHs(sv_2mortal(newSViv(ns_num)));
+					XPUSHs(sv_2mortal(newSViv( !which )));
+					PUTBACK;
+					call_pv("Unicode::Number::System::_new", G_SCALAR);
+					SPAGAIN;
+					if (count != 1)
+						croak("Big trouble\n");
+					rh = SvREFCNT_inc(POPs);
+					PUTBACK;
+					FREETMPS;
+					LEAVE;
+
 
 					av_push(l, newRV((SV *)rh)); /* and add to list */
 				}
@@ -105,6 +117,11 @@ _new(const char* class, int ns, char* string, int both_dir)
 
 		/* Create a reference to the hash */
 		SV *const self = newRV_noinc( (SV *)hash );
+		/* store in hash { s => $str, n => $id } */
+		len = strlen(ns_str);
+		hv_stores(hash, "s", newSVpv(ns_str, len));
+		hv_stores(hash, "n", newSViv(ns_num));
+		hv_stores(hash, "both_dir", newSViv( both_dir ));
 
 		/* bless into the proper package */
 		RETVAL = sv_bless( self, gv_stashpv( class, 0 ) );
