@@ -63,7 +63,7 @@ list_number_systems(Unicode::Number self)
 	CODE:
 		if( NULL == (ref = (AV**)hv_fetchs(self, "_list_ns_cache", 0)) ) {
 			dSP;
-			EXTEND(SP, 3);
+			EXTEND(SP, 4);
 			SV* sv_uns_package = sv_2mortal(newSVpvs("Unicode::Number::System"));
 			SV* sv_ns_str = sv_2mortal(newSVpv("", 0));
 			SV* sv_ns_num = sv_2mortal(newSViv(0));
