@@ -126,9 +126,8 @@ _new(SV* klass, SV* ns_str, int ns_num, bool both_dir)
 		/* store in hash
 		 * { _name => $ns_str, _id => $ns_num, _both_dir => $both_dir }
 		 */
-		len = strlen(ns_str);
-		hv_stores(hash, "_name", SvPV(ns_str, len)); /* string with the name of
-														number system */
+		hv_stores(hash, "_name", newSVsv(ns_str)); /* string with the name of
+													  number system */
 		hv_stores(hash, "_id", newSViv(ns_num));  /* this is a numeric ID */
 		hv_stores(hash, "_both_dir", boolSV( both_dir )); /* can be converted
 															 back? */
