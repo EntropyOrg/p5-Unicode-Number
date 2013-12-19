@@ -82,10 +82,10 @@ list_number_systems(Unicode::Number self)
 					ENTER;
 					SAVETMPS;
 					PUSHMARK(SP);
-					XPUSHs(sv_2mortal(newSVpvs("Unicode::Number::System")));
-					XPUSHs(sv_2mortal(newSVpv(ns_str, len)));
-					XPUSHs(sv_2mortal(newSViv(ns_num)));
-					XPUSHs(boolSV( !which ));
+					PUSHs(sv_2mortal(newSVpvs("Unicode::Number::System")));
+					PUSHs(sv_2mortal(newSVpv(ns_str, len)));
+					PUSHs(sv_2mortal(newSViv(ns_num)));
+					PUSHs(boolSV( !which ));
 					PUTBACK;
 					count = call_pv("Unicode::Number::System::_new", G_SCALAR);
 					SPAGAIN;
