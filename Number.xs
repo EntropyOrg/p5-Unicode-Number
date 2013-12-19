@@ -62,6 +62,8 @@ list_number_systems(Unicode::Number self)
 		int count;
 	CODE:
 		if( NULL == (ref = (AV**)hv_fetchs(self, "_list_ns_cache", 0)) ) {
+			dSP;
+			EXTEND(SP, 3);
 			/* not cached yet */
 			l = (AV *)sv_2mortal((SV *)newAV());
 			/* which = 1 : get all number systems that can be used in both
@@ -72,8 +74,6 @@ list_number_systems(Unicode::Number self)
 			for(which = 0; which <= 1; which++ ) {
 				while (ns_str = ListNumberSystems(1,which)) {
 					HV * rh;
-					dSP;
-					EXTEND(SP, 3);
 					rh = (HV *)sv_2mortal((SV *)newHV());
 
 					/* get the ID for the number system */
@@ -86,7 +86,7 @@ list_number_systems(Unicode::Number self)
 					XPUSHs(sv_2mortal(newSVpvs("Unicode::Number::System")));
 					XPUSHs(sv_2mortal(newSVpv(ns_str, len)));
 					XPUSHs(sv_2mortal(newSViv(ns_num)));
-					XPUSHs(sv_2mortal(boolSV( !which )));
+					XPUSHs(boolSV( !which ));
 					PUTBACK;
 					count = call_pv("Unicode::Number::System::_new", G_SCALAR);
 					SPAGAIN;
