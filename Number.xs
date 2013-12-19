@@ -148,7 +148,7 @@ _id(Unicode::Number::System self)
 		RETVAL = (IV*) hv_fetchs(self, "_id", 0);
 	OUTPUT: RETVAL
 
-SV*
+SV
 convertible_in_both_directions(Unicode::Number::System self)
 	CODE:
 		RETVAL = *hv_fetchs(self, "_both_dir", 0);
