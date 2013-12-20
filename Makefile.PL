@@ -33,7 +33,9 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "Test::More" => 0
+    "DDP" => 0,
+    "Test::More" => 0,
+    "utf8" => 0
   },
   "VERSION" => "0.001",
   "XS" => {

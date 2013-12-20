@@ -10,6 +10,7 @@ dist.ini
 inc/UninumMakeMaker.pm
 lib/Unicode/Number.pm
 ppport.h
+t/conversion.t
 t/number_systems.t
 t/version.t
 typemap
