@@ -19,6 +19,5 @@ ok( ! $ns->[-1]->convertible_in_both_directions );
 is_deeply( $ns, $uni->list_number_systems );
 
 is( $uni->list_number_systems->[0]->name, 'Aegean');
-use DDP; p $uni->list_number_systems;
 
 done_testing;
