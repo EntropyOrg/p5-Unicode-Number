@@ -24,4 +24,3 @@ is( $ns_lao->name, 'Lao' );
 # test if converting the num using ns is equal to str
 # test that guessing the number system is correct
 
-use DDP; p $data;
