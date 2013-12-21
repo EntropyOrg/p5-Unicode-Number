@@ -18,4 +18,6 @@ ok( ! $ns->[-1]->convertible_in_both_directions );
 
 is_deeply( $ns, $uni->list_number_systems );
 
+is( $uni->list_number_systems->[0]->name, 'Aegean');
+
 done_testing;
