@@ -7,9 +7,11 @@ use strict;
 use warnings;
 
 
+
+
 1;
 
-# ABSTRACT: representation of a specific number system
+# ABSTRACT: representation of a number system
 
 __END__
 
@@ -19,7 +21,7 @@ __END__
 
 =head1 NAME
 
-Unicode::Number::System - representation of a specific number system
+Unicode::Number::System - representation of a number system
 
 =head1 VERSION
 
@@ -27,13 +29,36 @@ version 0.001
 
 =head1 SYNOPSIS
 
-  use My::Package; # TODO
+  use Unicode::Number;
 
-  print My::Package->new;
+  my $u = Unicode::Number->new;
+  # print out all the number systems
+  print join ", "
+           map { $_->name }
+           @{ $u->list_number_systems };
 
 =head1 DESCRIPTION
 
-TODO
+This class is the representation of a number system that can be used for
+conversion by L<Unicode::Number>. The list of number systems supported is given
+by the L<list_number_systems|Unicode::Number/list_number_systems> of L<Unicode::Number>.
+
+=head1 ATTRIBUTES
+
+=head2 name
+
+Returns a string for the C<libuninum> name of the number system.
+
+=head2 convertible_in_both_directions
+
+Returns a boolean.
+
+If C<true>, then the number system can be used to convert to from strings to
+numbers and from numbers to strings (in C<libuninum> terminology: "specific
+number systems").
+
+If C<false>, then the number system can only be used to convert strings to
+numbers. (in C<libuninum> terminology: "cover terms").
 
 =head1 AUTHOR
 
