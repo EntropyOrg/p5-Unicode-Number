@@ -33,7 +33,7 @@ version 0.001
 
   my $u = Unicode::Number->new;
   # print out all the number systems
-  print join ", ", map { $_->name } @{ $u->list_number_systems };
+  say join "\n", map { $_->name } @{ $u->list_number_systems };
 
 =head1 DESCRIPTION
 
