@@ -9,6 +9,8 @@ README.md
 dist.ini
 inc/UninumMakeMaker.pm
 lib/Unicode/Number.pm
+lib/Unicode/Number/Result.pm
+lib/Unicode/Number/System.pm
 ppport.h
 t/conversion.t
 t/number_systems.t
