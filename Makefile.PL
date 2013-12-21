@@ -28,6 +28,7 @@ my %WriteMakefileArgs = (
   "NAME" => "Unicode::Number",
   "PREREQ_PM" => {
     "Alien::Uninum" => 0,
+    "List::AllUtils" => 0,
     "XSLoader" => 0,
     "strict" => 0,
     "warnings" => 0

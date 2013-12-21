@@ -39,7 +39,8 @@ version 0.001
 
 This class is the representation of a number system that can be used for
 conversion by L<Unicode::Number>. The list of number systems supported is given
-by the L<list_number_systems|Unicode::Number/list_number_systems> of L<Unicode::Number>.
+by the C<L<list_number_systems|Unicode::Number/list_number_systems>> of
+L<Unicode::Number>.
 
 =head1 ATTRIBUTES
 
@@ -51,7 +52,7 @@ Returns a string for the C<libuninum> name of the number system.
 
 Returns a boolean.
 
-If C<true>, then the number system can be used to convert to from strings to
+If C<true>, then the number system can be used to convert from strings to
 numbers and from numbers to strings (in C<libuninum> terminology: "specific
 number systems").
 
