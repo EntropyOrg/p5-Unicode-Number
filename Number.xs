@@ -169,7 +169,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		/* TODO */
 		uninum_err = 0;
 		fprintf(stderr, "-----\n");
-		fprintf(stderr, "%ls\n", str);
+		fprintf(stderr, "%ls --- %d\n", str, NumberSystem);
 		fprintf(stderr, "-----\n");
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
 		StringToInt(&val, str, NS_TYPE_STRING, NumberSystem);
