@@ -27,6 +27,7 @@ sub get_number_system_by_name {
 sub string_to_number {
 	my ($self, $number_system, $digits_string) = @_;
 	my $ns_id;
+	use DDP; p $str;
 	if( ref $number_system && $number_system->can('_id') ) {
 		$ns_id = $number_system->_id;
 	} else {
@@ -37,7 +38,6 @@ sub string_to_number {
 	#my $digits_string_u32 = encode('UTF-32', $digits_string);
 	my $digits_string_u32 = $digits_string;
 	my $str = $self->_StringToNumberString($digits_string_u32, $ns_id);
-	use DDP; p $str;
 	return $str;
 	#Unicode::Number::Result->new($num);
 }
