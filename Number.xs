@@ -84,9 +84,9 @@ int uninum_is_ok() {
 	return uninum_err == NS_ERROR_OKAY;
 }
 
-PROTOTYPES: ENABLE
-
 MODULE = Unicode::Number      PACKAGE = Unicode::Number
+
+PROTOTYPES: ENABLE
 
 const char*
 version(Unicode::Number self)
