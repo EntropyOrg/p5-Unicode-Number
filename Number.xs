@@ -169,12 +169,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		/* TODO */
 		wchar_t str[] =L"1234"; /* Lao digits 5 7 6 */
 		uninum_err = 0;
-		fprintf(stderr, "-----\n");
-		fprintf(stderr, "%ls --- %d -> %d\n", str, NumberSystem, sizeof(str));
-		fprintf(stderr, "|%d|\n", sizeof(str[1]) );
-		fprintf(stderr, "-----\n");
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
-		fprintf(stderr, "[[[%d]]]\n", GuessNumberSystem((UTF32*) str));
 		/*StringToInt(&val, (UTF32*)str, NS_TYPE_ULONG, NS_WESTERN_GENERIC);*/
 		StringToInt(&val, L"\x0ED5\x0ED7\x0ED6", NS_TYPE_ULONG, NS_LAO);
 		if(0 != uninum_err){
