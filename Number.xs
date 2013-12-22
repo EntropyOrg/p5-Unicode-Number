@@ -192,7 +192,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		/*wchar_t str[] =L"\x00000ED5\x0000000ED7\x0000000ED6"; [> Lao digits 5 7 6 <]*/
 		/*wchar_t str[] =L"1"; [> Lao digits 5 7 6 <]*/
 		uninum_err = 0;
-		hexdump(str, sizeof(str), 16);
+		hexdump((char*)str, sizeof(str), 16);
 		fprintf(stderr, "%ls (%d = %d)\n", str, sizeof(uint32_t), sizeof(UTF32));
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
 		StringToInt(&val, str, NS_TYPE_STRING, NS_WESTERN);
