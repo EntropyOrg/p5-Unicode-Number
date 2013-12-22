@@ -37,8 +37,6 @@ sub string_to_number {
 	#my $digits_string_u32 = encode('UTF-32', $digits_string);
 	#my $g = Encode::decode_utf8($digits_string);
 	#my $digits_string_u32 = $digits_string;
-	use DDP; p $number_system;
-	use DDP; p $ns_id;
 	my $str = $self->_StringToNumberString($digits_string, $ns_id);
 	return $str;
 	#Unicode::Number::Result->new($num);
