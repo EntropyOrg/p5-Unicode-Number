@@ -195,8 +195,8 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		ns = GuessNumberSystem((UTF32*) str);
 		fprintf(stderr, "-> %d which is %s\n\n", ns, NumberSystemToString(ns));
 		uninum_err = 0;
-		hexdump((char*)str, sizeof(str), 4);
-		fprintf(stderr, "%ls (%d = %d)\n", str, sizeof(uint32_t), sizeof(UTF32));
+		hexdump((char*)str, sizeof(str) + 1, 4);
+		/*fprintf(stderr, "%ls (%d = %d)\n", str, sizeof(uint32_t), sizeof(UTF32));*/
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
 		StringToInt(&val, (UTF32*)str, NS_TYPE_ULONG, ns);
 		fprintf(stderr, "----\n-----\n-----\n");
