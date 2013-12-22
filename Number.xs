@@ -138,7 +138,7 @@ _new(SV* klass, SV* ns_str, int ns_num, bool both_dir)
 		RETVAL = (SV*)sv_bless( self, gv_stashsv( klass, 0 ) );
 	OUTPUT: RETVAL
 
-/* this will return a UTF-8 string */
+# this will return a UTF-8 string
 SV*
 _StringToNumberString(Unicode::Number self, char* u32_str, int NumberSystem)
 	INIT:
