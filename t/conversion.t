@@ -1,11 +1,12 @@
 use Test::More;
 
 use utf8;
+use Encode qw/decode_utf8/;
 use_ok 'Unicode::Number';
 
 my $data = [
-	{ ns => ['Lao'], num => 576, str => "\x{0ED5}\x{0ED7}\x{0ED6}" },
-	{ ns => ['Gurmukhi'], num => 132, str => "\x{0A67}\x{0A69}\x{0A68}" },
+	{ ns => ['Lao'], num => 576, str => decode_utf8("\x{0ED5}\x{0ED7}\x{0ED6}") },
+	{ ns => ['Gurmukhi'], num => 132, str => decode_utf8("\x{0A67}\x{0A69}\x{0A68}") },
 	# TODO test largeer number (Math::BigInt::GMP)?
 ];
 
