@@ -139,9 +139,25 @@ _new(SV* klass, SV* ns_str, int ns_num, bool both_dir)
 	OUTPUT: RETVAL
 
 SV*
-_StringToNumberString(Unicode::Number self, char* u32_str)
+_StringToNumberString(Unicode::Number self, char* u32_str, int NumberSystem)
+	INIT:
+		union ns_rval val;
+	CODE:
+		/* TODO */
+		StringToInt(&val,(UTF32 *)str, NS_TYPE_STRING, NumberSystem);
+		if(0 != uninum_err){
+			RETVAL = &PL_sv_undef;
+			/* TODO structured exceptions: croak_sv */
+			croak("%s", uninum_error_str());
+		} else {
+			RETVAL = newSVpv(val.s);
+		}
+	OUTPUT: RETVAL
+
+SV* _GuessNumberSystem(Unicode::Number self, char* u32_str)
 	INIT:
 	CODE:
+		/* TODO */
 	OUTPUT: RETVAL
 
 SV*

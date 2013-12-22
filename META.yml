@@ -16,6 +16,7 @@ meta-spec:
 name: Unicode-Number
 requires:
   Alien::Uninum: 0
+  Carp: 0
   List::AllUtils: 0
   XSLoader: 0
   strict: 0
