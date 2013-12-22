@@ -18,6 +18,12 @@
 typedef HV* Unicode__Number;          /* Unicode::Number */
 typedef HV* Unicode__Number__System;  /* Unicode::Number::System */
 
+/*wchar_t *                   T_WCHAR
+
+INPUT
+T_WCHAR
+    $var = SvToWChar($arg);
+    SAVEFREEPV($var);*/
 
 /* from http://cpansearch.perl.org/src/TBUSCH/Lucene-0.13/cpp/utils.cpp */
 wchar_t*
