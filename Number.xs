@@ -20,12 +20,12 @@ typedef HV* Unicode__Number__System;  /* Unicode::Number::System */
 
 void hexdump(unsigned char *buffer, unsigned long index, unsigned long width)
 {
- unsigned long i;
+ unsigned long i,spacer;
  for (i=0;i<index;i++)
        {
        fprintf(stderr, "%02x ",buffer[i]);
        }
- for (unsigned long spacer=index;spacer<width;spacer++)
+ for (spacer=index;spacer<width;spacer++)
        fprintf(stderr, "   ");
  fprintf(stderr,": ");
  for (i=0;i<index;i++)
@@ -195,7 +195,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		hexdump((char*)str, sizeof(str), 16);
 		fprintf(stderr, "%ls (%d = %d)\n", str, sizeof(uint32_t), sizeof(UTF32));
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
-		StringToInt(&val, str, NS_TYPE_STRING, NS_WESTERN);
+		StringToInt(&val, (UTF32*)str, NS_TYPE_STRING, NS_WESTERN);
 		fprintf(stderr, "----\n-----\n-----\n");
 		if( uninum_err ) fprintf(stderr, "%s\n", val.s);
 		if(0 != uninum_err){
