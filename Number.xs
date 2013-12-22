@@ -171,6 +171,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		/* TODO */
 		wchar_t str[] =L"1234"; /* Lao digits 5 7 6 */
 		uninum_err = 0;
+		fprintf(stderr, "----\n-----\n-----\n");
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
 		StringToInt(&val, (UTF32*) L"\x0ED5\x0ED7\x0ED6", NS_TYPE_STRING, NS_LAO);
 		if(0 != uninum_err){
