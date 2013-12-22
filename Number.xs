@@ -138,10 +138,12 @@ _new(SV* klass, SV* ns_str, int ns_num, bool both_dir)
 		RETVAL = (SV*)sv_bless( self, gv_stashsv( klass, 0 ) );
 	OUTPUT: RETVAL
 
+/* this will return a UTF-8 string */
 SV*
 _StringToNumberString(Unicode::Number self, char* u32_str, int NumberSystem)
 	INIT:
 		union ns_rval val;
+		size_t len;
 	CODE:
 		/* TODO */
 		StringToInt(&val,(UTF32 *)str, NS_TYPE_STRING, NumberSystem);
@@ -150,7 +152,8 @@ _StringToNumberString(Unicode::Number self, char* u32_str, int NumberSystem)
 			/* TODO structured exceptions: croak_sv */
 			croak("%s", uninum_error_str());
 		} else {
-			RETVAL = newSVpv(val.s);
+			len = strlen(val.s);
+			RETVAL = newSVpv(val.s, len);
 		}
 	OUTPUT: RETVAL
 
