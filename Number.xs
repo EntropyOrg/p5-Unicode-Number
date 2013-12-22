@@ -168,7 +168,9 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 	CODE:
 		/* TODO */
 		uninum_err = 0;
-		printf("%ls\n", str);
+		fprintf(stderr, "-----\n");
+		fprintf(stderr, "%ls\n", str);
+		fprintf(stderr, "-----\n");
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
 		StringToInt(&val,(UTF32 *)str, NS_TYPE_STRING, NumberSystem);
 		if(0 != uninum_err){
