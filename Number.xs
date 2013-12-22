@@ -18,6 +18,24 @@
 typedef HV* Unicode__Number;          /* Unicode::Number */
 typedef HV* Unicode__Number__System;  /* Unicode::Number::System */
 
+void hexdump(unsigned char *buffer, unsigned long index, unsigned long width)
+{
+ unsigned long i;
+ for (i=0;i<index;i++)
+       {
+       fprintf(stderr, "%02x ",buffer[i]);
+       }
+ for (unsigned long spacer=index;spacer<width;spacer++)
+       fprintf(stderr, "   ");
+ fprintf(stderr,": ");
+ for (i=0;i<index;i++)
+       {
+       if (buffer[i] < 32) fprintf(stderr, ".");
+       else fprintf(stderr, "%c",buffer[i]);
+       }
+ fprintf(stderr,"\n");
+}
+
 /*wchar_t *                   T_WCHAR
 
 INPUT
@@ -169,11 +187,12 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 	CODE:
 		/* TODO */
 		/*wchar_t str[] =L"1234"; [> Lao digits 5 7 6 <]*/
-		/*wchar_t str[] =L"\x0ED5\x0ED7\x0ED6"; [> Lao digits 5 7 6 <]*/
+		wchar_t str[] =L"\x0ED5\x0ED7\x0ED6"; /* Lao digits 5 7 6 */
 		/*wchar_t str[] =L"\0໕\0໗\0໖"; [> Lao digits 5 7 6 <]*/
 		/*wchar_t str[] =L"\x00000ED5\x0000000ED7\x0000000ED6"; [> Lao digits 5 7 6 <]*/
-		wchar_t str[] =L"1"; /* Lao digits 5 7 6 */
+		/*wchar_t str[] =L"1"; [> Lao digits 5 7 6 <]*/
 		uninum_err = 0;
+		hexdump(str, sizeof(str), 16);
 		fprintf(stderr, "%ls (%d = %d)\n", str, sizeof(uint32_t), sizeof(UTF32));
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
 		StringToInt(&val, str, NS_TYPE_STRING, NS_WESTERN);
