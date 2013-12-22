@@ -114,30 +114,6 @@ number_systems(Unicode::Number self)
 		RETVAL = (AV*)SvREFCNT_inc(*ref);
 	OUTPUT: RETVAL
 
-MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
-
-SV*
-_new(SV* klass, SV* ns_str, int ns_num, bool both_dir)
-	INIT:
-		Unicode__Number__System hash;
-		size_t len;
-	CODE:
-		hash = newHV(); /* Create a hash */
-		/* store in hash
-		 * { _name => $ns_str, _id => $ns_num, _both_dir => $both_dir }
-		 */
-		hv_stores(hash, "_name", newSVsv(ns_str)); /* string with the name of
-													  number system */
-		hv_stores(hash, "_id", newSViv(ns_num));  /* this is a numeric ID */
-		hv_stores(hash, "_both_dir", boolSV( both_dir )); /* can be converted
-															 back? */
-
-		/* Create a reference to the hash */
-		SV *const self = newRV_noinc( (SV *)hash );
-		/* bless into the proper package */
-		RETVAL = (SV*)sv_bless( self, gv_stashsv( klass, 0 ) );
-	OUTPUT: RETVAL
-
 # this will return a UTF-8 string
 SV*
 _StringToNumberString(Unicode::Number self, char* u32_str, int NumberSystem)
@@ -161,6 +137,30 @@ SV* _GuessNumberSystem(Unicode::Number self, char* u32_str)
 	INIT:
 	CODE:
 		/* TODO */
+	OUTPUT: RETVAL
+
+MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
+
+SV*
+_new(SV* klass, SV* ns_str, int ns_num, bool both_dir)
+	INIT:
+		Unicode__Number__System hash;
+		size_t len;
+	CODE:
+		hash = newHV(); /* Create a hash */
+		/* store in hash
+		 * { _name => $ns_str, _id => $ns_num, _both_dir => $both_dir }
+		 */
+		hv_stores(hash, "_name", newSVsv(ns_str)); /* string with the name of
+													  number system */
+		hv_stores(hash, "_id", newSViv(ns_num));  /* this is a numeric ID */
+		hv_stores(hash, "_both_dir", boolSV( both_dir )); /* can be converted
+															 back? */
+
+		/* Create a reference to the hash */
+		SV *const self = newRV_noinc( (SV *)hash );
+		/* bless into the proper package */
+		RETVAL = (SV*)sv_bless( self, gv_stashsv( klass, 0 ) );
 	OUTPUT: RETVAL
 
 SV*
