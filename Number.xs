@@ -154,7 +154,7 @@ number_systems(Unicode::Number self)
 
 # this will return a UTF-8 string
 SV*
-_StringToNumberString(Unicode::Number self, wchar_t* u32_str, int NumberSystem)
+_StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 	INIT:
 		union ns_rval val;
 		STRLEN len;
