@@ -35,13 +35,13 @@ numbers. (in C<libuninum> terminology: "cover terms").
 
   my $u = Unicode::Number->new;
   # print out all the number systems
-  say join "\n", map { $_->name } @{ $u->list_number_systems };
+  say join "\n", map { $_->name } @{ $u->number_systems };
 
 =head1 DESCRIPTION
 
 This class is the representation of a number system that can be used for
 conversion by L<Unicode::Number>. The list of number systems supported is given
-by the C<L<list_number_systems|Unicode::Number/list_number_systems>> of
+by the C<L<number_systems|Unicode::Number/number_systems>> of
 L<Unicode::Number>.
 
 =cut

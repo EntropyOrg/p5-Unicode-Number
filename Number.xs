@@ -51,7 +51,7 @@ version(Unicode::Number self)
 # retrieves number systems as an array
 # and caches the result
 AV*
-list_number_systems(Unicode::Number self)
+number_systems(Unicode::Number self)
 	INIT:
 		AV* l;
 		char* ns_str;
@@ -61,7 +61,7 @@ list_number_systems(Unicode::Number self)
 		int which;
 		int count;
 	CODE:
-		if( NULL == (ref = (AV**)hv_fetchs(self, "_list_ns_cache", 0)) ) {
+		if( NULL == (ref = (AV**)hv_fetchs(self, "_ns_cache", 0)) ) {
 			dSP;
 			EXTEND(SP, 4);
 			SV* sv_uns_package = sv_2mortal(newSVpvs("Unicode::Number::System"));
@@ -108,7 +108,7 @@ list_number_systems(Unicode::Number self)
 				}
 				ListNumberSystems(0,0); /* Reset */
 			}
-			hv_stores(self, "_list_ns_cache", SvREFCNT_inc((SV*) l));
+			hv_stores(self, "_ns_cache", SvREFCNT_inc((SV*) l));
 			ref = &l;
 		}
 		RETVAL = (AV*)SvREFCNT_inc(*ref);

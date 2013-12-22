@@ -1,5 +1,4 @@
 package Unicode::Number;
-# ABSTRACT: handle numerals in Unicode using the libuninum library
 
 use strict;
 use warnings;
@@ -14,6 +13,12 @@ sub new {
 	bless {}, shift;
 }
 
+=method number_systems
+
+Returns an arrayref of L<Unicode::Number::System> instances.
+
+=cut
+
 =method get_number_system_by_name($name)
 
 Returns the L<Unicode::Number::System> that has the name given by the $name
@@ -22,15 +27,20 @@ parameter (string) or C<undef> if not found.
 =cut
 sub get_number_system_by_name {
 	my ($self, $name) = @_;
-	return first { $_->name eq $name } @{ $self->list_number_systems };
+	return first { $_->name eq $name } @{ $self->number_systems };
 }
 
 1;
-=head1 NAME
+# ABSTRACT: handle numerals in Unicode using the libuninum library
 
-Unicode::Number - handle numerals in Unicode using the C<libuninum> library
+=pod
 
 =head1 SYNOPSIS
+
+  use Unicode::Number;
+
+  my $u = Unicode::Number->new;
+
 
 =head1 DESCRIPTION
 
