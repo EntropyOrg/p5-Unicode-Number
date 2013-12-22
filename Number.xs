@@ -172,7 +172,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		fprintf(stderr, "%ls\n", str);
 		fprintf(stderr, "-----\n");
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
-		StringToInt(&val,(UTF32 *)str, NS_TYPE_STRING, NumberSystem);
+		StringToInt(&val, str, NS_TYPE_STRING, NumberSystem);
 		if(0 != uninum_err){
 			RETVAL = &PL_sv_undef;
 			/* TODO structured exceptions: croak_sv */
