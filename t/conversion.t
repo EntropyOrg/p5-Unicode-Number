@@ -14,6 +14,8 @@ my $uni = Unicode::Number->new;
 my $ns_lao = $uni->get_number_system_by_name('Lao');
 is( $ns_lao->name, 'Lao' );
 
+die "moo";
+
 #my $result = $uni->string_to_number($ns_lao, decode_utf8("\x{0ED5}\x{0ED7}\x{0ED6}"));
 #isa_ok( $result, 'Unicode::Number::Result' );
 
