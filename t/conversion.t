@@ -16,6 +16,7 @@ is( $ns_lao->name, 'Lao' );
 
 
 my $result = $uni->string_to_number($ns_lao, decode_utf8("\x{0ED5}\x{0ED7}\x{0ED6}"));
+use DDP; p $result;
 isa_ok( $result, 'Unicode::Number::Result' );
 
 #is( $result->to_numeric, 576 );
