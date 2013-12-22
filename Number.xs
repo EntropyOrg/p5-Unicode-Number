@@ -177,7 +177,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 			croak("libuninum: (%d) %s", uninum_err, uninum_error_str());
 		} else {
 			len = strlen(val.s);
-			fprintf(len, "the length is %d\n", len);
+			fprintf(stderr, "the length is %d\n", len);
 			RETVAL = newSVpv(val.s, len);
 		}
 	OUTPUT: RETVAL
