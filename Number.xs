@@ -176,7 +176,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		uninum_err = 0;
 		fprintf(stderr, "%ls\n", str);
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
-		StringToInt(&val, (uint32_t*) str, NS_TYPE_STRING, NS_WESTERN);
+		StringToInt(&val, (UTF32*) str, NS_TYPE_STRING, NS_WESTERN);
 		fprintf(stderr, "----\n-----\n-----\n");
 		if(0 != uninum_err){
 			RETVAL = &PL_sv_undef;
