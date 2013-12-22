@@ -146,7 +146,7 @@ _StringToNumberString(Unicode::Number self, char* u32_str, int NumberSystem)
 		size_t len;
 	CODE:
 		/* TODO */
-		StringToInt(&val,(UTF32 *)str, NS_TYPE_STRING, NumberSystem);
+		StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);
 		if(0 != uninum_err){
 			RETVAL = &PL_sv_undef;
 			/* TODO structured exceptions: croak_sv */
