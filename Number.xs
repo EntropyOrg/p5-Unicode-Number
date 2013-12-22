@@ -193,7 +193,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		/*wchar_t str[] =L"1"; [> Lao digits 5 7 6 <]*/
 		int ns;
 		ns = GuessNumberSystem((UTF32*) str);
-		fprintf(stderr, "-> %d\n\n", ns);
+		fprintf(stderr, "-> %d which is %s\n\n", ns, NumberSystemToString(ns));
 		uninum_err = 0;
 		hexdump((char*)str, sizeof(str), 4);
 		fprintf(stderr, "%ls (%d = %d)\n", str, sizeof(uint32_t), sizeof(UTF32));
