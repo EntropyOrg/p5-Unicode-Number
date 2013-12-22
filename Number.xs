@@ -171,7 +171,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		uninum_err = 0;
 		fprintf(stderr, "-----\n");
 		fprintf(stderr, "%ls --- %d -> %d\n", str, NumberSystem, sizeof(str));
-		fprintf(stderr, "|%c|\n", str[0] );
+		fprintf(stderr, "|%c|\n", str[1] );
 		fprintf(stderr, "-----\n");
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
 		fprintf(stderr, "[[[%d]]]\n", GuessNumberSystem((UTF32*) str));
