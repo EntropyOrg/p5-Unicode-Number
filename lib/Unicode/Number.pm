@@ -33,7 +33,9 @@ sub string_to_number {
 		$ns_id = $ns->_id if defined $ns;
 	}
 	croak "Invalid number system\n" unless defined $ns_id;
-	return $ns_id;
+	my $str = $self->_StringToNumberString($digits_string, $ns_id);
+	return $str;
+	#Unicode::Number::Result->new($num);
 }
 
 
