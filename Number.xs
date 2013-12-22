@@ -198,8 +198,9 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		hexdump((char*)str, sizeof(str), 4);
 		fprintf(stderr, "%ls (%d = %d)\n", str, sizeof(uint32_t), sizeof(UTF32));
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
-		StringToInt(&val, (UTF32*)str, NS_TYPE_STRING, ns);
+		StringToInt(&val, (UTF32*)str, NS_TYPE_ULONG, ns);
 		fprintf(stderr, "----\n-----\n-----\n");
+		if( uninum_err ) fprintf(stderr, "%u\n", val.u);
 		if( uninum_err ) fprintf(stderr, "%s\n", val.s);
 		if(0 != uninum_err){
 			RETVAL = &PL_sv_undef;
