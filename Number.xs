@@ -173,9 +173,9 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		uninum_err = 0;
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
 		StringToInt(&val, (UTF32*) L"\x0ED5\x0ED7\x0ED6", NS_TYPE_STRING, NS_LAO);
+		fprintf(stderr, "----\n-----\n-----\n");
 		if(0 != uninum_err){
 			RETVAL = &PL_sv_undef;
-		fprintf(stderr, "----\n-----\n-----\n");
 			/* TODO structured exceptions: croak_sv */
 			croak("libuninum: (%d) %s", uninum_err, uninum_error_str());
 		} else {
