@@ -18,6 +18,44 @@
 typedef HV* Unicode__Number;          /* Unicode::Number */
 typedef HV* Unicode__Number__System;  /* Unicode::Number::System */
 
+
+/* from http://cpansearch.perl.org/src/TBUSCH/Lucene-0.13/cpp/utils.cpp */
+wchar_t*
+SvToWChar(SV* arg)
+{
+    wchar_t* ret;
+    // Get string length of argument. This works for PV, NV and IV.
+    // The STRLEN typdef is needed to ensure that this will work correctly
+    // in a 64-bit environment.
+    STRLEN arg_len;
+    SvPV(arg, arg_len);
+
+    // Alloc memory for wide char string.  This could be a bit more
+    // then necessary.
+    Newz(0, ret, arg_len + 1, wchar_t);
+
+    U8* src = (U8*) SvPV_nolen(arg);
+    wchar_t* dst = ret;
+
+    if (SvUTF8(arg)) {
+        // UTF8 to wide char mapping
+        STRLEN len;
+        while (*src) {
+            *dst++ = utf8_to_uvuni(src, &len);
+            src += len;
+        }
+    } else {
+        // char to wide char mapping
+        while (*src) {
+            *dst++ = (wchar_t) *src++;
+        }
+    }
+    *dst = 0;
+    return ret;
+}
+
+
+
 const char* uninum_error_str() {
 	switch(uninum_err) {
 		case NS_ERROR_OKAY:                  return "No error";
@@ -55,7 +93,7 @@ number_systems(Unicode::Number self)
 	INIT:
 		AV* l;
 		char* ns_str;
-		size_t len;
+		STRLEN len;
 		int ns_num;
 		AV** ref;
 		int which;
@@ -119,7 +157,7 @@ SV*
 _StringToNumberString(Unicode::Number self, wchar_t* u32_str, int NumberSystem)
 	INIT:
 		union ns_rval val;
-		size_t len;
+		STRLEN len;
 	CODE:
 		/* TODO */
 		StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);
@@ -145,7 +183,7 @@ SV*
 _new(SV* klass, SV* ns_str, int ns_num, bool both_dir)
 	INIT:
 		Unicode__Number__System hash;
-		size_t len;
+		STRLEN len;
 	CODE:
 		hash = newHV(); /* Create a hash */
 		/* store in hash

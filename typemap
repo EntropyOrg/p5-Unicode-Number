@@ -1,2 +1,9 @@
 Unicode::Number            T_HVREF
 Unicode::Number::System    T_HVREF
+
+wchar_t *                   T_WCHAR
+
+INPUT
+T_WCHAR
+    $var = SvToWChar($arg);
+    SAVEFREEPV($var);
