@@ -26,7 +26,7 @@ T_WCHAR
     SAVEFREEPV($var);*/
 
 /* from http://cpansearch.perl.org/src/TBUSCH/Lucene-0.13/cpp/utils.cpp */
-wchar_t*
+/*wchar_t*
 SvToWChar(SV* arg)
 {
     wchar_t* ret;
@@ -58,7 +58,7 @@ SvToWChar(SV* arg)
     }
     *dst = 0;
     return ret;
-}
+}*/
 
 
 
