@@ -158,9 +158,11 @@ _StringToNumberString(Unicode::Number self, wchar_t* u32_str, int NumberSystem)
 	INIT:
 		union ns_rval val;
 		STRLEN len;
+		wchar_t str[] =L"\x0ED5\x0ED7\x0ED6"; /* Lao digits 5 7 6 */
 	CODE:
 		/* TODO */
-		StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);
+		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
+		StringToInt(&val,(UTF32 *)str, NS_TYPE_STRING, NumberSystem);
 		if(0 != uninum_err){
 			RETVAL = &PL_sv_undef;
 			/* TODO structured exceptions: croak_sv */
