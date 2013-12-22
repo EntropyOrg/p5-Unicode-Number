@@ -165,9 +165,9 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		union ns_rval val;
 		STRLEN len;
 		/*wchar_t str[] =L"\x0ED5\x0ED7\x0ED6"; [> Lao digits 5 7 6 <]*/
-		wchar_t str[] =L"1234"; /* Lao digits 5 7 6 */
 	CODE:
 		/* TODO */
+		wchar_t str[] =L"1234"; /* Lao digits 5 7 6 */
 		uninum_err = 0;
 		fprintf(stderr, "-----\n");
 		fprintf(stderr, "%ls --- %d -> %d\n", str, NumberSystem, sizeof(str));
