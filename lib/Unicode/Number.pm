@@ -79,7 +79,7 @@ sub _get_ns_id {
 
 sub _utf32_str_to_utf8_str {
 	my ($self, $digits_string) = @_;
-	decode($self->_get_utf32_encoding, $digits_string );
+	decode_utf8 decode($self->_get_utf32_encoding, $digits_string );
 }
 
 sub _utf8_str_to_utf32_str {
