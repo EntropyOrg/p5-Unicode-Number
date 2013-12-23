@@ -46,7 +46,11 @@ for my $test (@$data) {
 }
 
 ok( not defined $uni->guess_number_system("*") );
+ok( not defined $uni->guess_number_system("/") );
+
 is( $uni->guess_number_system("1"), 'Western' );
-is( $uni->guess_number_system("0"), 'll_Zero' );
+
+is( $uni->guess_number_system("0"), 'All_Zero' );
+is( $uni->guess_number_system("000"), 'All_Zero' );
 
 done_testing;
