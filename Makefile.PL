@@ -31,14 +31,13 @@ my %WriteMakefileArgs = (
     "Carp" => 0,
     "Encode" => 0,
     "List::AllUtils" => 0,
-    "Math::BigIntg" => 0,
+    "Math::BigInt" => 0,
     "XSLoader" => 0,
     "overload" => 0,
     "strict" => 0,
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "Math::BigInt" => 0,
     "Test::More" => 0,
     "utf8" => 0
   },
