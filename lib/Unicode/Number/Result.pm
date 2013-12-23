@@ -6,6 +6,28 @@ package Unicode::Number::Result;
 use strict;
 use warnings;
 
+sub _new {
+	my ($class, $str) = @_;
+	bless $str, $class;
+}
+
+sub to_string {
+	my ($self);
+	return "$self";
+}
+sub to_numeric {
+	my ($self) = @_;
+	return 0+$self;
+}
+
+# TODO Math::BigInt
+sub to_bigint {
+	my ($self) = @_;
+	eval {
+		require Math::BigInt;
+		return Math::BigInt->new($self->to_string);
+	};
+}
 
 1;
 
