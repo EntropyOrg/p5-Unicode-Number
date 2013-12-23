@@ -27,7 +27,7 @@ sub to_bigint {
 		require Math::BigInt;
 		$bigint = Math::BigInt->new($self->to_string);
 	};
-	die $@ if $@;
+	die $@ if defined $@;
 	$bigint;
 }
 
