@@ -8,16 +8,16 @@ use warnings;
 
 sub _new {
 	my ($class, $str) = @_;
-	bless $str, $class;
+	bless \$str, $class;
 }
 
 sub to_string {
 	my ($self);
-	return "$self";
+	return "$$self";
 }
 sub to_numeric {
 	my ($self) = @_;
-	return 0+$self;
+	return 0+$$self;
 }
 
 # TODO Math::BigInt
