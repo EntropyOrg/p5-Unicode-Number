@@ -12,7 +12,7 @@ sub _new {
 }
 
 sub to_string {
-	my ($self);
+	my ($self) = @_;
 	return "$$self";
 }
 sub to_numeric {
