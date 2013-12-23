@@ -20,7 +20,6 @@ sub to_numeric {
 	return 0+$$self;
 }
 
-# TODO Math::BigInt
 sub to_bigint {
 	my ($self) = @_;
 	eval {
