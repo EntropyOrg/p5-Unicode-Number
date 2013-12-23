@@ -22,6 +22,10 @@ isa_ok( $result, 'Unicode::Number::Result' );
 is( $result->to_numeric, 576 );
 is( $uni->string_to_number('Lao', $lao_digits)->to_numeric, 576 );
 
+if( eval { require Math::BigIntg } ) {
+	is( $result->to_bigint, Math::BigIntg->new("576") );
+}
+
 # TODO
 # test if converting the str using ns is equal to num
 # test if converting the num using ns is equal to str
