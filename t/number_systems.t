@@ -19,7 +19,7 @@ ok( ! $ns->[-1]->convertible_in_both_directions );
 
 use DDP; &p("$ns->[0]");
 use DDP; p overload::Method($ns, '""');
-ok( $ns->[0] eq 'Aegean', 'stringification');
+ok( "$ns->[0]" eq 'Aegean', 'stringification');
 
 is_deeply( $ns, $uni->number_systems );
 
