@@ -17,7 +17,7 @@ is( $ns->[-1]->name, 'Western');
 is( $ns->[-1]->_id, 120);
 ok( ! $ns->[-1]->convertible_in_both_directions );
 
-use DDP; p "$ns->[0]";
+use DDP; &p("$ns->[0]");
 use DDP; p overload::Method($ns, '""');
 ok( $ns->[0] eq 'Aegean', 'stringification');
 
