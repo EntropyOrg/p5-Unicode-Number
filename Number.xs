@@ -119,22 +119,21 @@ number_systems(Unicode::Number self)
 SV*
 _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 	INIT:
-		uint32_t* u32_str;
+		U32* u32_str;
 		union ns_rval val;
 		STRLEN len;
 		int i;
 	CODE:
 		uninum_err = 0;
 
-		u32_str = SvPV(u32_str_sv, len);
+		u32_str = (U32*)SvPV(u32_str_sv, len);
 
-		/*[>DEBUG<]for(i = 0; i < len/sizeof(uint32_t); i++) {
-			fprintf(stderr, "%lx and %lx == %d\n", u32_str[i], u32_str_c[i], u32_str[i] == u32_str_c[i]);
+		/*[>DEBUG<]for(i = 0; i < len/sizeof(U32); i++) {
+			fprintf(stderr, "%lx\n", u32_str[i]);
 		}*/
 		StringToInt(&val, u32_str, NS_TYPE_STRING, NumberSystem);
 
 		if(0 != uninum_err){
-			RETVAL = &PL_sv_undef;
 			/* TODO structured exceptions: croak_sv */
 			croak("libuninum: (%d) %s", uninum_err, uninum_error_str());
 		} else {
