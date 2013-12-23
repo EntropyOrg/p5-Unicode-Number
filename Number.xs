@@ -184,7 +184,7 @@ _NumberStringToString(Unicode::Number self, SV* decimal_str_sv, int NumberSystem
 			len = 0;
 			u32_idx = u32_str;
 			while( ! *(++u32_idx) ) len += sizeof(U32);
-			RETVAL = newSVpv(u32_str, len );
+			RETVAL = newSVpv((char*)u32_str, len );
 		}
 	OUTPUT: RETVAL
 
