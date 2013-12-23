@@ -6,8 +6,7 @@ package Unicode::Number::System;
 use strict;
 use warnings;
 
-use overload 
-	'""' => \&name;
+use overload '""' => \&__PACKAGE__::name;
 
 
 
