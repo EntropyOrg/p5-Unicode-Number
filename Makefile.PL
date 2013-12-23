@@ -29,6 +29,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Alien::Uninum" => 0,
     "Carp" => 0,
+    "DDP" => 0,
     "Encode" => 0,
     "List::AllUtils" => 0,
     "Math::BigInt" => 0,
@@ -39,7 +40,6 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "DDP" => 0,
     "Test::More" => 0,
     "utf8" => 0
   },
