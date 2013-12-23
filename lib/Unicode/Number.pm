@@ -42,7 +42,7 @@ sub number_to_string {
 }
 
 sub guess_number_system {
-	my ($digits_string) = @_;
+	my ($self, $digits_string) = @_;
 	my $digits_string_u32 = $self->_utf8_str_to_utf32_str($digits_string);
 	my $ns_id = $self->_GuessNumberSystem($digits_string_u32);
 
