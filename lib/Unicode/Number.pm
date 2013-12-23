@@ -38,9 +38,11 @@ sub string_to_number {
 	croak "Invalid number system\n" unless defined $ns_id;
 
 
-	my $digits_string_u32 = pack "*L", encode(
-		$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE', # encode to native byte-order
-		$digits_string . "\0");
+	my $digits_string_u32 = encode(
+		# encode to native byte-order
+		$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE',
+		$digits_string . "\0" # add null-terminator for C
+		);
 	my $num_str = $self->_StringToNumberString($digits_string_u32, $ns_id);
 
 	return Unicode::Number::Result->new($num_str) if defined $num_str;
