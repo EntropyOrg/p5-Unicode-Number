@@ -47,7 +47,7 @@ for my $test (@$data) {
 
 ok( not defined $uni->guess_number_system("*") );
 is( $uni->guess_number_system("1"), 'Western' );
+use DDP; p $uni->guess_number_system("0");
 is( $uni->guess_number_system("0"), 'All_Zero' );
-ok( not defined $uni->guess_number_system("*") );
 
 done_testing;
