@@ -35,12 +35,13 @@ const char* uninum_error_str() {
 	return "Invalid error";
 }
 
-
 int uninum_is_ok() {
 	return uninum_err == NS_ERROR_OKAY;
 }
 
 MODULE = Unicode::Number      PACKAGE = Unicode::Number
+
+PROTOTYPES: ENABLE
 
 const char*
 version(Unicode::Number self)
@@ -55,7 +56,7 @@ number_systems(Unicode::Number self)
 	INIT:
 		AV* l;
 		char* ns_str;
-		size_t len;
+		STRLEN len;
 		int ns_num;
 		AV** ref;
 		int which;
@@ -114,13 +115,47 @@ number_systems(Unicode::Number self)
 		RETVAL = (AV*)SvREFCNT_inc(*ref);
 	OUTPUT: RETVAL
 
+# this will return a UTF-8 string
+SV*
+_StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
+	INIT:
+		uint32_t* u32_str;
+		union ns_rval val;
+		STRLEN len;
+		int i;
+	CODE:
+		uninum_err = 0;
+
+		u32_str = SvPV(u32_str_sv, len);
+
+		/*[>DEBUG<]for(i = 0; i < len/sizeof(uint32_t); i++) {
+			fprintf(stderr, "%lx and %lx == %d\n", u32_str[i], u32_str_c[i], u32_str[i] == u32_str_c[i]);
+		}*/
+		StringToInt(&val, u32_str, NS_TYPE_STRING, NumberSystem);
+
+		if(0 != uninum_err){
+			RETVAL = &PL_sv_undef;
+			/* TODO structured exceptions: croak_sv */
+			croak("libuninum: (%d) %s", uninum_err, uninum_error_str());
+		} else {
+			len = strlen(val.s);
+			RETVAL = newSVpv(val.s, len);
+		}
+	OUTPUT: RETVAL
+
+SV* _GuessNumberSystem(Unicode::Number self, char* u32_str)
+	INIT:
+	CODE:
+		/* TODO */
+	OUTPUT: RETVAL
+
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 
 SV*
 _new(SV* klass, SV* ns_str, int ns_num, bool both_dir)
 	INIT:
 		Unicode__Number__System hash;
-		size_t len;
+		STRLEN len;
 	CODE:
 		hash = newHV(); /* Create a hash */
 		/* store in hash
@@ -137,7 +172,6 @@ _new(SV* klass, SV* ns_str, int ns_num, bool both_dir)
 		/* bless into the proper package */
 		RETVAL = (SV*)sv_bless( self, gv_stashsv( klass, 0 ) );
 	OUTPUT: RETVAL
-
 
 SV*
 name(Unicode::Number::System self)
