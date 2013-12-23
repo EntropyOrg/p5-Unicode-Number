@@ -21,7 +21,9 @@ isa_ok( $result, 'Unicode::Number::Result' );
 
 is( $result->to_string, "576" );
 is( $result->to_numeric, 576 );
-is( $uni->string_to_number('Lao', $lao_digits)->to_numeric, 576 );
+
+
+is( $uni->string_to_number('Lao', $lao_digits)->to_numeric, 576 , 'use string');
 
 if( eval { require Math::BigInt } ) {
 	is( $result->to_bigint, Math::BigInt->new("576") );
@@ -30,7 +32,7 @@ if( eval { require Math::BigInt } ) {
 for my $test (@$data) {
 	my $ns = $uni->get_number_system_by_name($test->{ns});
 	is( $ns, $test->{ns} );
-	my $result = $uni->string_to_number($test->{str}, $test->{ns});
+	my $result = $uni->string_to_number($test->{ns}, $test->{str});
 	# test if converting the str using ns is equal to num
 	is( $result->to_numeric, $test->{num} );
 
