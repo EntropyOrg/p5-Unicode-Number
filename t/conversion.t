@@ -42,7 +42,7 @@ for my $test (@$data) {
 
 	# TODO
 	# test that guessing the number system is correct
-	#is( $uni->guess_number_system($test->{str}), $test->{ns});
+	is( $uni->guess_number_system($test->{str}), $test->{ns});
 }
 
 done_testing;

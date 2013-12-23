@@ -29,6 +29,29 @@ sub get_number_system_by_name {
 
 sub string_to_number {
 	my ($self, $number_system, $digits_string) = @_;
+	my $ns_id = $self->_get_ns_id($number_system);
+
+	my $digits_string_u32 = $self->_utf8_str_to_utf32_str($digits_string);
+	my $num_str = $self->_StringToNumberString($digits_string_u32, $ns_id);
+
+	return Unicode::Number::Result->_new($num_str) if defined $num_str;
+}
+
+sub number_to_string {
+	# TODO
+}
+
+sub guess_number_system {
+	my ($digits_string) = @_;
+	my $digits_string_u32 = $self->_utf8_str_to_utf32_str($digits_string);
+	my $ns_id = $self->_GuessNumberSystem($digits_string_u32);
+
+	# TODO Unknown? -> undef?
+	first { $_->_id == $ns_id } @{ $self->number_systems };
+}
+
+sub _get_ns_id {
+	my ($self, $number_system) = @_;
 	my $ns_id;
 	if( ref $number_system && $number_system->can('_id') ) {
 		$ns_id = $number_system->_id;
@@ -38,18 +61,16 @@ sub string_to_number {
 	}
 
 	croak "Invalid number system\n" unless defined $ns_id;
-
-
-	my $digits_string_u32 = encode(
-		# encode to native byte-order
-		$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE',
-		$digits_string . "\0" # add null-terminator for C
-		);
-	my $num_str = $self->_StringToNumberString($digits_string_u32, $ns_id);
-
-	return Unicode::Number::Result->_new($num_str) if defined $num_str;
+	$ns_id;
 }
 
+sub _utf8_str_to_utf32_str {
+	my ($self, $digits_string) = @_;
+	encode( # encode to native byte-order
+		$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE',
+		$digits_string . "\0" # add null-terminator for C
+	);
+}
 
 1;
 # ABSTRACT: handle numerals in Unicode using the libuninum library
@@ -112,6 +133,10 @@ or a string (see L<get_number_system_by_name|Unicode::Number/get_number_system_b
 
 The value of $number can be either a numeric integer value or a string that
 matches the regular expression C</[0-9]+/>.
+
+=head2 guess_number_system($digits_string)
+
+TODO
 
 =head1 SEE ALSO
 
