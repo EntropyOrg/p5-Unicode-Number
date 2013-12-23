@@ -46,6 +46,7 @@ sub number_to_string {
 	my $ns_id = $self->_get_ns_id($number_system);
 
 	my $digits_string_u32 = $self->_NumberStringToString($number, $ns_id);
+	use DDP; p $digits_string_u32;
 
 	return $self->_utf32_str_to_utf8_str($digits_string_u32);
 }
