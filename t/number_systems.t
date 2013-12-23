@@ -23,4 +23,8 @@ is_deeply( $ns, $uni->number_systems );
 
 is( $uni->number_systems->[0]->name, 'Aegean');
 
+my $ns_lao = $uni->get_number_system_by_name('Lao');
+is( $ns_lao, 'Lao');
+is( $ns_lao->iso15924_code, 'Laoo' );
+
 done_testing;
