@@ -24,7 +24,7 @@ sub to_bigint {
 	my ($self) = @_;
 	my $bigint;
 	eval {
-		require Math::BigInt;
+		require Math::BigIntg;
 		$bigint = Math::BigInt->new($self->to_string);
 	} or die $@;
 	$bigint;
