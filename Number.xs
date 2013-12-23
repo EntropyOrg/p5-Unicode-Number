@@ -189,10 +189,12 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 	CODE:
 		/* TODO */
 		uninum_err = 0;
+
 		u32_str = SvPV(u32_str_sv, len);
-		u32_str++; /* move past the BOM */
-		fprintf(stderr, "%d\n", len);
-		for(i = 0; i < (len - 1)/sizeof(uint32_t); i++) {
+		/* move past the BOM */
+		u32_str++; len -= sizeof(uint32_t);
+
+		for(i = 0; i < len/sizeof(uint32_t); i++) {
 			fprintf(stderr, "%lx\n", u32_str[i]);
 		}
 		StringToInt(&val, u32_str, NS_TYPE_STRING, NumberSystem);
