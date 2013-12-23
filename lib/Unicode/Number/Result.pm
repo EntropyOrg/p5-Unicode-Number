@@ -26,8 +26,7 @@ sub to_bigint {
 	eval {
 		require Math::BigInt;
 		$bigint = Math::BigInt->new($self->to_string);
-	};
-	die $@ if defined $@;
+	} or die $@;
 	$bigint;
 }
 
