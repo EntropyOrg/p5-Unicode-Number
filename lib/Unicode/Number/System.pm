@@ -6,7 +6,9 @@ package Unicode::Number::System;
 use strict;
 use warnings;
 
-use overload '""' => \&Unicode::Number::System::name;
+use overload '""' => \&_stringify;
+
+sub _stringify { $_[0]->name; }
 
 
 
