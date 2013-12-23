@@ -142,10 +142,25 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		}
 	OUTPUT: RETVAL
 
-SV* _GuessNumberSystem(Unicode::Number self, char* u32_str)
+# this returns an integer ID
+SV* _GuessNumberSystem(Unicode::Number self, SV* u32_str_sv)
 	INIT:
+		U32* u32_str;
+		STRLEN len;
+		int ns;
 	CODE:
-		/* TODO */
+		uninum_err = 0;
+
+		u32_str = (U32*)SvPV(u32_str_sv, len);
+
+		ns = GuessNumberSystem(u32_str);
+
+		if(0 != uninum_err){
+			/* TODO structured exceptions: croak_sv */
+			croak("libuninum: (%d) %s", uninum_err, uninum_error_str());
+		} else {
+			RETVAL = newSViv(ns);
+		}
 	OUTPUT: RETVAL
 
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System

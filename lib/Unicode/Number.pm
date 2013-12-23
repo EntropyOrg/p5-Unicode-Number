@@ -54,22 +54,9 @@ The value of $digits_string must be encoded in UTF-8.
 =cut
 sub string_to_number {
 	my ($self, $number_system, $digits_string) = @_;
-	my $ns_id;
-	if( ref $number_system && $number_system->can('_id') ) {
-		$ns_id = $number_system->_id;
-	} else {
-		my $ns = $self->get_number_system_by_name($number_system);
-		$ns_id = $ns->_id if defined $ns;
-	}
+	my $ns_id = $self->_get_ns_id($number_system);
 
-	croak "Invalid number system\n" unless defined $ns_id;
-
-
-	my $digits_string_u32 = encode(
-		# encode to native byte-order
-		$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE',
-		$digits_string . "\0" # add null-terminator for C
-		);
+	my $digits_string_u32 = $self->_utf8_str_to_utf32_str($digits_string);
 	my $num_str = $self->_StringToNumberString($digits_string_u32, $ns_id);
 
 	return Unicode::Number::Result->_new($num_str) if defined $num_str;
@@ -87,6 +74,58 @@ The value of $number can be either a numeric integer value or a string that
 matches the regular expression C</[0-9]+/>.
 
 =cut
+sub number_to_string {
+	# TODO
+}
+
+=method guess_number_system($digits_string)
+
+Returns the L<Unicode::Number::System> that matches the contents of the numbers
+in the string $digits_string if it can be found.
+
+In the special case when $digits_string contains only '0', then it returns a
+L<Unicode::Number::System> with the name 'All_Zero' because several number
+systems make overlapping use of this glyph.
+
+Otherwise, if the number system is unknown, returns C<undef>.
+
+The value of $digits_string must be encoded in UTF-8.
+
+=cut
+sub guess_number_system {
+	my ($self, $digits_string) = @_;
+	my $digits_string_u32 = $self->_utf8_str_to_utf32_str($digits_string);
+	my $ns_id = $self->_GuessNumberSystem($digits_string_u32);
+
+	if( Unicode::Number::System::NS_UNKNOWN == $ns_id ) {
+		return undef;
+	} elsif( Unicode::Number::System::NS_ALLZERO == $ns_id ) {
+		return Unicode::Number::System::ALLZERO;
+	}
+	first { $_->_id == $ns_id } @{ $self->number_systems };
+}
+
+sub _get_ns_id {
+	my ($self, $number_system) = @_;
+	my $ns_id;
+	if( ref $number_system && $number_system->can('_id') ) {
+		$ns_id = $number_system->_id;
+	} else {
+		my $ns = $self->get_number_system_by_name($number_system);
+		$ns_id = $ns->_id if defined $ns;
+	}
+
+	croak "Invalid number system\n" unless defined $ns_id;
+	$ns_id;
+}
+
+sub _utf8_str_to_utf32_str {
+	my ($self, $digits_string) = @_;
+	encode( # encode to native byte-order
+		$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE',
+		$digits_string . "\0" # add null-terminator for C
+	);
+}
 
 1;
 # ABSTRACT: handle numerals in Unicode using the libuninum library
