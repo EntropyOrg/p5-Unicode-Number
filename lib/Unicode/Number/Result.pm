@@ -22,10 +22,13 @@ sub to_numeric {
 
 sub to_bigint {
 	my ($self) = @_;
-	return eval {
+	my $bigint;
+	eval {
 		require Math::BigInt;
-		Math::BigInt->new($self->to_string);
+		$bigint = Math::BigInt->new($self->to_string);
 	};
+	die $@ if $@;
+	$bigint;
 }
 
 1;
