@@ -185,10 +185,14 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		uint32_t* u32_str;
 		union ns_rval val;
 		STRLEN len;
+		int i;
 	CODE:
 		/* TODO */
 		uninum_err = 0;
 		u32_str = SvPV(u32_str_sv, len);
+		for(i = 0; i < len; i++) {
+			fprintf(stderr, "%lx\n", u32_str[i]);
+		}
 		StringToInt(&val, u32_str, NS_TYPE_STRING, NumberSystem);
 
 		if(0 != uninum_err){
