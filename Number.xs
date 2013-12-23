@@ -182,6 +182,7 @@ number_systems(Unicode::Number self)
 SV*
 _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 	INIT:
+		wchar_t u32_str_c[] =L"\x0ED5\x0ED7\x0ED6"; /* Lao digits 5 7 6 */
 		uint32_t* u32_str;
 		union ns_rval val;
 		STRLEN len;
@@ -195,7 +196,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		u32_str++; len -= sizeof(uint32_t);
 
 		for(i = 0; i < len/sizeof(uint32_t); i++) {
-			fprintf(stderr, "%lx\n", u32_str[i]);
+			fprintf(stderr, "%lx and %lx == %d\n", u32_str[i], u32_str_c[i], u32_str[i] == u32_str_c[i]);
 		}
 		StringToInt(&val, u32_str, NS_TYPE_STRING, NumberSystem);
 
