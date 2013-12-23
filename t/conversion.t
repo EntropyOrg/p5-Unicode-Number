@@ -28,6 +28,8 @@ if( eval { require Math::BigInt } ) {
 }
 
 for my $test (@$data) {
+	my $ns = $uni->get_number_system_by_name($test->{ns});
+	is( $ns, $test->{ns} );
 	my $result = $uni->string_to_number($test->{str}, $test->{ns});
 	# test if converting the str using ns is equal to num
 	is( $result->to_numeric, $test->{num} );
