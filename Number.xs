@@ -200,8 +200,6 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		/*StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);*/
 		StringToInt(&val, (UTF32*)str, NS_TYPE_ULONG, ns);
 
-		int temp_val; temp_val = 100; while( temp_val--> 0 ) { if( temp_val < 50 ) temp_val = 100; }
-
 		fprintf(stderr, "----\n-----\n-----\n");
 		if( uninum_err ) fprintf(stderr, "%u\n", val.u);
 		if( uninum_err ) fprintf(stderr, "%s\n", val.s);
