@@ -22,9 +22,9 @@ sub to_numeric {
 
 sub to_bigint {
 	my ($self) = @_;
-	eval {
+	return eval {
 		require Math::BigInt;
-		return Math::BigInt->new($self->to_string);
+		Math::BigInt->new($self->to_string);
 	};
 }
 
