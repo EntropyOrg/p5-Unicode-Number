@@ -8,7 +8,7 @@ use warnings;
 
 use Alien::Uninum;
 use List::AllUtils qw/first/;
-use Encode qw(encode decode);
+use Encode qw(encode decode decode_utf8);
 use Config;
 use Carp;
 use Unicode::Number::System;
@@ -46,7 +46,6 @@ sub number_to_string {
 	my $ns_id = $self->_get_ns_id($number_system);
 
 	my $digits_string_u32 = $self->_NumberStringToString($number, $ns_id);
-	use DDP; p $digits_string_u32;
 
 	return $self->_utf32_str_to_utf8_str($digits_string_u32);
 }
@@ -80,7 +79,7 @@ sub _get_ns_id {
 
 sub _utf32_str_to_utf8_str {
 	my ($self, $digits_string) = @_;
-	decode($self->_get_utf32_encoding, $digits_string );
+	decode_utf8 decode($self->_get_utf32_encoding, $digits_string );
 }
 
 sub _utf8_str_to_utf32_str {
