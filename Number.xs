@@ -187,8 +187,6 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		STRLEN len;
 	CODE:
 		/* TODO */
-		int ns;
-		ns = GuessNumberSystem((UTF32*) str);
 		uninum_err = 0;
 		u32_str = SvPV(u32_str_sv, len);
 		StringToInt(&val, u32_str, NS_TYPE_STRING, NumberSystem);
