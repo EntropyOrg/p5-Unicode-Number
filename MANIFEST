@@ -5,7 +5,6 @@ META.yml
 Makefile.PL
 Number.xs
 README
-README.md
 dist.ini
 inc/UninumMakeMaker.pm
 lib/Unicode/Number.pm

@@ -6,6 +6,9 @@ package Unicode::Number::System;
 use strict;
 use warnings;
 
+our %NS_STR_TO_ISO_15924 = (
+);
+
 use overload '""' => \&_stringify, fallback => 1;
 
 sub _stringify { $_[0]->name; }
