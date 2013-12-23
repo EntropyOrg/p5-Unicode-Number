@@ -153,12 +153,18 @@ sub _get_utf32_encoding {
 =head1 SYNOPSIS
 
   use Unicode::Number;
+  use Encode qw(decode_utf8);
 
   my $u = Unicode::Number->new;
-
+  my $lao_str = decode_utf8 "\x{0ED5}\x{0ED7}\x{0ED6}";
+  my $ns = $u->guess_number_system($lao_str);
+  say $u->string_to_number($ns, $lao_str)->to_string; # 576
 
 =head1 DESCRIPTION
 
+This class is used to interface with the C<libuninum> library to convert to and
+from different number system representations. It can be used to convert from a
+UTF-8 string to one of the types supported by L<Unicode::Number::Result>.
 
 =head1 SEE ALSO
 

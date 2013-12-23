@@ -8,15 +8,32 @@ sub _new {
 	bless \$str, $class;
 }
 
+=method to_string
+
+Returns a string that represents the result.
+
+=cut
+
 sub to_string {
 	my ($self) = @_;
 	return "$$self";
 }
+
+=method to_numeric
+
+Returns an integer that numifies the result.
+
+=cut
 sub to_numeric {
 	my ($self) = @_;
 	return 0+$$self;
 }
 
+=method to_numeric
+
+Returns a L<Math::BigInt> of the result.
+
+=cut
 sub to_bigint {
 	my ($self) = @_;
 	eval {
@@ -27,18 +44,22 @@ sub to_bigint {
 
 1;
 
-# ABSTRACT: one line description
+# ABSTRACT: class to obtain different representations of a string to integer conversion
 
 =pod
 
 =head1 SYNOPSIS
 
-  use My::Package; # TODO
+  use Unicode::Number;
+  use Math::BigInt;
+  use v5.14;
 
-  print My::Package->new;
+  say Unicode::Number->new->string_to_number('Western', '123')->to_bigint;
 
 =head1 DESCRIPTION
 
-TODO
+This class is used to wrap around the results of a string to number conversion
+from the L<string_to_number|Unicode::Number/string_to_number> method in
+L<Unicode::Number>.
 
 =cut
