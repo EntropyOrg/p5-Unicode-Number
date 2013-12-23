@@ -10,4 +10,5 @@ my $uni = Unicode::Number->new;
 
 eval {
 	$uni->string_to_number('Lao', "123");
-} or die $@;
+};
+like( $@, /illegal character/ );
