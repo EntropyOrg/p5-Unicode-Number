@@ -191,8 +191,6 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		u32_str = SvPV(u32_str_sv, len);
 		StringToInt(&val, u32_str, NS_TYPE_STRING, NumberSystem);
 
-		fprintf(stderr, "----\n-----\n-----\n");
-		if( uninum_err ) fprintf(stderr, "%u\n", val.u);
 		if( uninum_err ) fprintf(stderr, "%s\n", val.s);
 		if(0 != uninum_err){
 			RETVAL = &PL_sv_undef;
