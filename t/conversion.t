@@ -19,8 +19,8 @@ my $result = $uni->string_to_number($ns_lao, decode_utf8("\x{0ED5}\x{0ED7}\x{0ED
 use DDP; p $result;
 isa_ok( $result, 'Unicode::Number::Result' );
 
-#is( $result->to_numeric, 576 );
-#is( $uni->string_to_number('Lao',   decode_utf8("\x{0ED5}\x{0ED7}\x{0ED6}"))->to_numeric, 576 );
+is( $result->to_numeric, 576 );
+is( $uni->string_to_number('Lao', decode_utf8("\x{0ED5}\x{0ED7}\x{0ED6}"))->to_numeric, 576 );
 
 # TODO
 # test if converting the str using ns is equal to num
