@@ -36,11 +36,9 @@ for my $test (@$data) {
 	# test if converting the str using ns is equal to num
 	is( $result->to_numeric, $test->{num} );
 
-	# TODO
 	# test if converting the num using ns is equal to str
-	#is( $uni->number_to_string($test->{ns}, $test->{num}), $ns->{str} );
+	is( $uni->number_to_string($test->{ns}, $test->{num}), $test->{str} );
 
-	# TODO
 	# test that guessing the number system is correct
 	is( $uni->guess_number_system($test->{str}), $test->{ns});
 }

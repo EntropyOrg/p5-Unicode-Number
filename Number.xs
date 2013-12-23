@@ -163,6 +163,31 @@ SV* _GuessNumberSystem(Unicode::Number self, SV* u32_str_sv)
 		}
 	OUTPUT: RETVAL
 
+# this returns a UTF-32 string in the native byte-order
+SV*
+_NumberStringToString(Unicode::Number self, SV* decimal_str_sv, int NumberSystem)
+	INIT:
+		char* decimal_str;
+		union ns_rval val;
+		STRLEN len;
+		U32* u32_str;
+		U32* u32_idx;
+	CODE:
+		decimal_str = SvPV(decimal_str_sv, len);
+		val.s = decimal_str;
+		u32_str = IntToString(&val, NumberSystem, NS_TYPE_STRING);
+
+		if(0 != uninum_err){
+			/* TODO structured exceptions: croak_sv */
+			croak("libuninum: (%d) %s", uninum_err, uninum_error_str());
+		} else {
+			len = 0;
+			u32_idx = u32_str;
+			while( *(u32_idx++) ) len += sizeof(U32);
+			RETVAL = newSVpv((char*)u32_str, len );
+		}
+	OUTPUT: RETVAL
+
 MODULE = Unicode::Number      PACKAGE = Unicode::Number::System
 
 SV*

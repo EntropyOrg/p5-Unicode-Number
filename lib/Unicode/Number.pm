@@ -5,7 +5,7 @@ use warnings;
 
 use Alien::Uninum;
 use List::AllUtils qw/first/;
-use Encode qw(encode);
+use Encode qw(encode decode decode_utf8);
 use Config;
 use Carp;
 use Unicode::Number::System;
@@ -75,7 +75,16 @@ matches the regular expression C</[0-9]+/>.
 
 =cut
 sub number_to_string {
-	# TODO
+	my ($self, $number_system, $number) = @_;
+
+	# TODO structured exception
+	die "Not a decimal number: must contain 0-9" unless $number =~ /^[0-9]+$/;
+
+	my $ns_id = $self->_get_ns_id($number_system);
+
+	my $digits_string_u32 = $self->_NumberStringToString($number, $ns_id);
+
+	return $self->_utf32_str_to_utf8_str($digits_string_u32);
 }
 
 =method guess_number_system($digits_string)
@@ -119,12 +128,21 @@ sub _get_ns_id {
 	$ns_id;
 }
 
+sub _utf32_str_to_utf8_str {
+	my ($self, $digits_string) = @_;
+	decode_utf8 decode($self->_get_utf32_encoding, $digits_string );
+}
+
 sub _utf8_str_to_utf32_str {
 	my ($self, $digits_string) = @_;
-	encode( # encode to native byte-order
-		$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE',
-		$digits_string . "\0" # add null-terminator for C
-	);
+	encode($self->_get_utf32_encoding, $digits_string . "\0" );
+	# add null-terminator for C
+}
+
+sub _get_utf32_encoding {
+	my ($self) = @_;
+	# encode to native byte-order
+	$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE'
 }
 
 1;
