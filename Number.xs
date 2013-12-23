@@ -193,7 +193,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 
 		u32_str = SvPV(u32_str_sv, len);
 		/* move past the BOM */
-		u32_str++; len -= sizeof(uint32_t);
+		/*u32_str++; len -= sizeof(uint32_t);*/
 
 		for(i = 0; i < len/sizeof(uint32_t); i++) {
 			fprintf(stderr, "%lx and %lx == %d\n", u32_str[i], u32_str_c[i], u32_str[i] == u32_str_c[i]);
