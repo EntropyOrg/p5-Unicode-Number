@@ -70,10 +70,14 @@ sub _get_ns_id {
 
 sub _utf8_str_to_utf32_str {
 	my ($self, $digits_string) = @_;
-	encode( # encode to native byte-order
-		$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE',
-		$digits_string . "\0" # add null-terminator for C
-	);
+	encode($self->_get_utf32_encoding, $digits_string . "\0" );
+	# add null-terminator for C
+}
+
+sub _get_utf32_encoding {
+	my ($self) = @_;
+	# encode to native byte-order
+	$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE'
 }
 
 1;

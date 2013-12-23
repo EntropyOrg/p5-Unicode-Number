@@ -12,12 +12,17 @@ open my $prop_alias, '<', file($FindBin::Bin, 'PropertyValueAliases.txt');
 
 my %script_name_to_iso15924;
 
+# this is because charscript() returns the script name as ucfirst(lc())
+sub norm_script_name {
+	return $_[0] =~ s/_(.)/_\U$1/gr;
+}
+
 while(defined( my $sc_line = <$prop_alias> )) {
 	chomp $sc_line;
 	if( $sc_line =~ /^sc/ ) {
 		my @info = split /\s+;\s+/, $sc_line;
 		my $iso15924_code = $info[1];
-		my $full_name = $info[2];
+		my $full_name = norm_script_name($info[2]);
 		die "duplicate script name!\n" if exists $script_name_to_iso15924{$full_name};
 		$script_name_to_iso15924{$full_name} = $iso15924_code;
 	}
@@ -29,7 +34,7 @@ while(<DATA>) {
 	#if( /_END/ ) {
 		my ($name, $num) = (split)[(1,-1)];
 		my $codepoint = hex($num);
-		my $script_name = charscript($codepoint);
+		my $script_name = norm_script_name(charscript($codepoint));
 		my $iso15924_code = $script_name_to_iso15924{$script_name};
 		say "$name => '$iso15924_code' # $script_name";
 	#}
