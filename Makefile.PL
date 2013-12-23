@@ -33,6 +33,7 @@ my %WriteMakefileArgs = (
     "List::AllUtils" => 0,
     "Math::BigInt" => 0,
     "XSLoader" => 0,
+    "constant" => 0,
     "overload" => 0,
     "strict" => 0,
     "warnings" => 0

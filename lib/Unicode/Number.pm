@@ -47,6 +47,11 @@ sub guess_number_system {
 	my $ns_id = $self->_GuessNumberSystem($digits_string_u32);
 
 	# TODO Unknown? -> undef?
+	if( Unicode::Number::System::NS_UNKNOWN == $ns_id ) {
+		return undef;
+	} elsif( Unicode::Number::System::NS_ALLZERO == $ns_id ) {
+		return Unicode::Number::System::ALLZERO;
+	}
 	first { $_->_id == $ns_id } @{ $self->number_systems };
 }
 
@@ -137,7 +142,13 @@ matches the regular expression C</[0-9]+/>.
 =head2 guess_number_system($digits_string)
 
 Returns the L<Unicode::Number::System> that matches the contents of the numbers
-in the string $digits_string if it can be found. Otherwise returns C<undef>.
+in the string $digits_string if it can be found.
+
+In the special case when $digits_string contains only '0', then it returns a
+L<Unicode::Number::System> with the name 'All_Zero' because several number
+systems make overlapping use of this glyph.
+
+Otherwise, if the number system is unknown, returns C<undef>.
 
 The value of $digits_string must be encoded in UTF-8.
 
