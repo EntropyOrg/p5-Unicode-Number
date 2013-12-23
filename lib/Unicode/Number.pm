@@ -34,10 +34,8 @@ sub string_to_number {
 		$ns_id = $ns->_id if defined $ns;
 	}
 	croak "Invalid number system\n" unless defined $ns_id;
-	#my $digits_string_u32 = encode('UTF-32', $digits_string);
-	#my $g = Encode::decode_utf8($digits_string);
-	#my $digits_string_u32 = $digits_string;
-	my $str = $self->_StringToNumberString($digits_string, $ns_id);
+	my $digits_string_u32 = encode('UTF-32', $digits_string);
+	my $str = $self->_StringToNumberString($digits_string_u32, $ns_id);
 	use DDP; p $str;
 	return $str;
 	#Unicode::Number::Result->new($num);

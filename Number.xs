@@ -182,6 +182,7 @@ number_systems(Unicode::Number self)
 SV*
 _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 	INIT:
+		uint32_t* u32_str;
 		union ns_rval val;
 		STRLEN len;
 	CODE:
@@ -189,8 +190,8 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		int ns;
 		ns = GuessNumberSystem((UTF32*) str);
 		uninum_err = 0;
-		hexdump((char*)str, sizeof(str) + sizeof(wchar_t), 4);
-		StringToInt(&val,(UTF32 *)u32_str, NS_TYPE_STRING, NumberSystem);
+		u32_str = SvPV(u32_str_sv, len);
+		StringToInt(&val, u32_str, NS_TYPE_STRING, NumberSystem);
 
 		fprintf(stderr, "----\n-----\n-----\n");
 		if( uninum_err ) fprintf(stderr, "%u\n", val.u);
