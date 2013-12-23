@@ -136,7 +136,10 @@ matches the regular expression C</[0-9]+/>.
 
 =head2 guess_number_system($digits_string)
 
-TODO
+Returns the L<Unicode::Number::System> that matches the contents of the numbers
+in the string $digits_string if it can be found. Otherwise returns C<undef>.
+
+The value of $digits_string must be encoded in UTF-8.
 
 =head1 SEE ALSO
 
