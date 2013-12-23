@@ -51,6 +51,7 @@ version 0.001
 =head1 SYNOPSIS
 
   use Unicode::Number;
+  use Math::BigInt;
   use v5.14;
 
   say Unicode::Number->new->string_to_number('Western', '123')->to_bigint;
