@@ -46,5 +46,6 @@ for my $test (@$data) {
 }
 
 ok( not defined $uni->guess_number_system("*") );
+ok( not defined $uni->guess_number_system("1") );
 
 done_testing;
