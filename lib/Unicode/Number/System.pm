@@ -3,6 +3,10 @@ package Unicode::Number::System;
 use strict;
 use warnings;
 
+use overload '""' => \&_stringify, fallback => 1;
+
+sub _stringify { $_[0]->name; }
+
 =attr name
 
 Returns a string for the C<libuninum> name of the number system.

@@ -6,7 +6,10 @@ use warnings;
 use Alien::Uninum;
 use List::AllUtils qw/first/;
 use Encode qw(encode);
+use Config;
 use Carp;
+use Unicode::Number::System;
+use Unicode::Number::Result;
 
 use XSLoader;
 XSLoader::load( 'Unicode::Number', $Unicode::Number::VERSION );
@@ -58,11 +61,18 @@ sub string_to_number {
 		my $ns = $self->get_number_system_by_name($number_system);
 		$ns_id = $ns->_id if defined $ns;
 	}
+
 	croak "Invalid number system\n" unless defined $ns_id;
-	my $digits_string_u32 = encode('UTF-32LE', $digits_string . "\0");
-	my $str = $self->_StringToNumberString($digits_string_u32, $ns_id);
-	return $str;
-	#Unicode::Number::Result->new($num);
+
+
+	my $digits_string_u32 = encode(
+		# encode to native byte-order
+		$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE',
+		$digits_string . "\0" # add null-terminator for C
+		);
+	my $num_str = $self->_StringToNumberString($digits_string_u32, $ns_id);
+
+	return Unicode::Number::Result->_new($num_str) if defined $num_str;
 }
 
 =method number_to_string($number_system, $number)
