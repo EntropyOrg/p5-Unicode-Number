@@ -191,6 +191,7 @@ _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 		uninum_err = 0;
 		u32_str = SvPV(u32_str_sv, len);
 		u32_str++; /* move past the BOM */
+		fprintf(stderr, "%d\n", len);
 		for(i = 0; i < len - 1; i++) {
 			fprintf(stderr, "%lx\n", u32_str[i]);
 		}
