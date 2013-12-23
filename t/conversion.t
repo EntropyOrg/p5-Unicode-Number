@@ -36,7 +36,6 @@ for my $test (@$data) {
 	# test if converting the str using ns is equal to num
 	is( $result->to_numeric, $test->{num} );
 
-	# TODO
 	# test if converting the num using ns is equal to str
 	is( $uni->number_to_string($test->{ns}, $test->{num}), $test->{str} );
 

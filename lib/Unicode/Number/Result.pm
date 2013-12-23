@@ -11,10 +11,12 @@ sub _new {
 	bless \$str, $class;
 }
 
+
 sub to_string {
 	my ($self) = @_;
 	return "$$self";
 }
+
 sub to_numeric {
 	my ($self) = @_;
 	return 0+$$self;
@@ -30,7 +32,7 @@ sub to_bigint {
 
 1;
 
-# ABSTRACT: one line description
+# ABSTRACT: class to obtain different representations of a string to integer conversion
 
 __END__
 
@@ -40,7 +42,7 @@ __END__
 
 =head1 NAME
 
-Unicode::Number::Result - one line description
+Unicode::Number::Result - class to obtain different representations of a string to integer conversion
 
 =head1 VERSION
 
@@ -48,13 +50,30 @@ version 0.001
 
 =head1 SYNOPSIS
 
-  use My::Package; # TODO
+  use Unicode::Number;
+  use v5.14;
 
-  print My::Package->new;
+  say Unicode::Number->new->string_to_number('Western', '123')->to_bigint;
 
 =head1 DESCRIPTION
 
-TODO
+This class is used to wrap around the results of a string to number conversion
+from the L<string_to_number|Unicode::Number/string_to_number> method in
+L<Unicode::Number>.
+
+=head1 METHODS
+
+=head2 to_string
+
+Returns a string that represents the result.
+
+=head2 to_numeric
+
+Returns an integer that numifies the result.
+
+=head2 to_numeric
+
+Returns a L<Math::BigInt> of the result.
 
 =head1 AUTHOR
 
