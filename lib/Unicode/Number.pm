@@ -8,7 +8,7 @@ use warnings;
 
 use Alien::Uninum;
 use List::AllUtils qw/first/;
-use Encode qw(encode);
+use Encode qw(encode decode);
 use Config;
 use Carp;
 use Unicode::Number::System;
@@ -38,7 +38,14 @@ sub string_to_number {
 }
 
 sub number_to_string {
-	# TODO
+	my ($self, $number_system, $number) = @_;
+
+	# TODO structured exception
+	die "Not a decimal number: must contain 0-9" unless $number =~ /^[0-9]+$/;
+
+	my $digits_string_u32 = $self->_NumberStringToString($number, $number_system);
+
+	return $self->_utf32_str_to_utf8_str($digits_string_u32);
 }
 
 sub guess_number_system {
@@ -66,6 +73,11 @@ sub _get_ns_id {
 
 	croak "Invalid number system\n" unless defined $ns_id;
 	$ns_id;
+}
+
+sub _utf32_str_to_utf8_str {
+	my ($self, $digits_string) = @_;
+	decode($self->_get_utf32_encoding, $digits_string );
 }
 
 sub _utf8_str_to_utf32_str {
