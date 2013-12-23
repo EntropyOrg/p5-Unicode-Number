@@ -9,7 +9,7 @@ sub _new {
 }
 
 sub to_string {
-	my ($self);
+	my ($self) = @_;
 	return "$$self";
 }
 sub to_numeric {
@@ -22,7 +22,7 @@ sub to_bigint {
 	eval {
 		require Math::BigInt;
 		return Math::BigInt->new($self->to_string);
-	};
+	} or die $@;
 }
 
 1;
