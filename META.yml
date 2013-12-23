@@ -15,6 +15,8 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: Unicode-Number
+recommends:
+  Math::BigInt: 0
 requires:
   Alien::Uninum: 0
   Carp: 0
