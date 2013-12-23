@@ -47,7 +47,7 @@ sub string_to_number {
 		);
 	my $num_str = $self->_StringToNumberString($digits_string_u32, $ns_id);
 
-	return Unicode::Number::Result->new($num_str) if defined $num_str;
+	return Unicode::Number::Result->_new($num_str) if defined $num_str;
 }
 
 
