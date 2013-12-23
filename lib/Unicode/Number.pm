@@ -11,6 +11,8 @@ use List::AllUtils qw/first/;
 use Encode qw(encode);
 use Config;
 use Carp;
+use Unicode::Number::System;
+use Unicode::Number::Result;
 
 use XSLoader;
 XSLoader::load( 'Unicode::Number', $Unicode::Number::VERSION );
