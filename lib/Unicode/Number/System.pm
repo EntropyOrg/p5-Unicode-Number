@@ -6,6 +6,9 @@ package Unicode::Number::System;
 use strict;
 use warnings;
 
+use overload 
+	'""' => \&name;
+
 
 
 

@@ -32,6 +32,7 @@ my %WriteMakefileArgs = (
     "Encode" => 0,
     "List::AllUtils" => 0,
     "XSLoader" => 0,
+    "overload" => 0,
     "strict" => 0,
     "warnings" => 0
   },
