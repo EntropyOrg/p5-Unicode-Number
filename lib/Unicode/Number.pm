@@ -43,7 +43,9 @@ sub number_to_string {
 	# TODO structured exception
 	die "Not a decimal number: must contain 0-9" unless $number =~ /^[0-9]+$/;
 
-	my $digits_string_u32 = $self->_NumberStringToString($number, $number_system);
+	my $ns_id = $self->_get_ns_id($number_system);
+
+	my $digits_string_u32 = $self->_NumberStringToString($number, $ns_id);
 
 	return $self->_utf32_str_to_utf8_str($digits_string_u32);
 }
