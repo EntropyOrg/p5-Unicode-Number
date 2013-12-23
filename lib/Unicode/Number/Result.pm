@@ -22,7 +22,6 @@ sub to_numeric {
 
 sub to_bigint {
 	my ($self) = @_;
-	use DDP; p $self->to_string;
 	my $bigint;
 	eval {
 		require Math::BigInt;
