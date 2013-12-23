@@ -12,3 +12,5 @@ eval {
 	$uni->string_to_number('Lao', "123");
 };
 like( $@, qr/illegal character/ );
+
+done_testing;
