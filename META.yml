@@ -3,7 +3,6 @@ abstract: 'handle numerals in Unicode using the libuninum library'
 author:
   - 'Zakariyya Mughal <zmughal@cpan.org>'
 build_requires:
-  Math::BigIntg: 0
   Test::More: 0
   utf8: 0
 configure_requires:

@@ -38,7 +38,6 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "Math::BigIntg" => 0,
     "Test::More" => 0,
     "utf8" => 0
   },

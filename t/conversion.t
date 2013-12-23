@@ -22,8 +22,8 @@ isa_ok( $result, 'Unicode::Number::Result' );
 is( $result->to_numeric, 576 );
 is( $uni->string_to_number('Lao', $lao_digits)->to_numeric, 576 );
 
-if( eval { require Math::BigIntg } ) {
-	is( $result->to_bigint, Math::BigIntg->new("576") );
+if( eval { require Math::BigInt } ) {
+	is( $result->to_bigint, Math::BigInt->new("576") );
 }
 
 # TODO
