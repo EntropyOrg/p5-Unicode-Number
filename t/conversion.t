@@ -5,8 +5,8 @@ use Encode qw/decode_utf8/;
 use_ok 'Unicode::Number';
 
 my $data = [
-	{ ns => ['Lao'], num => 576, str => decode_utf8("\x{0ED5}\x{0ED7}\x{0ED6}") },
-	{ ns => ['Gurmukhi'], num => 132, str => decode_utf8("\x{0A67}\x{0A69}\x{0A68}") },
+	{ ns => 'Lao', num => 576, str => decode_utf8("\x{0ED5}\x{0ED7}\x{0ED6}") },
+	{ ns => 'Gurmukhi', num => 132, str => decode_utf8("\x{0A67}\x{0A69}\x{0A68}") },
 	# TODO test larger number (Math::BigInt::GMP)?
 ];
 
@@ -27,9 +27,18 @@ if( eval { require Math::BigInt } ) {
 	is( $result->to_bigint, Math::BigInt->new("576") );
 }
 
-# TODO
-# test if converting the str using ns is equal to num
-# test if converting the num using ns is equal to str
-# test that guessing the number system is correct
+for my $test (@$data) {
+	my $result = $uni->string_to_number($test->{str}, $test->{ns});
+	# test if converting the str using ns is equal to num
+	is( $result->to_numeric, $test->{num} );
+
+	# TODO
+	# test if converting the num using ns is equal to str
+	#is( $uni->number_to_string($test->{num}, $test->{ns}), $ns->{str} );
+
+	# TODO
+	# test that guessing the number system is correct
+	#is( $uni->guess_number_system($test->{str}), $test->{ns});
+}
 
 done_testing;
