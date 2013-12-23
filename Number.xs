@@ -18,68 +18,6 @@
 typedef HV* Unicode__Number;          /* Unicode::Number */
 typedef HV* Unicode__Number__System;  /* Unicode::Number::System */
 
-void hexdump(unsigned char *buffer, unsigned long index, unsigned long width)
-{
- unsigned long i,spacer;
- for (i=0;i<index;i++)
-       {
-       fprintf(stderr, "%02x ",buffer[i]);
-       }
- for (spacer=index;spacer<width;spacer++)
-       fprintf(stderr, "   ");
- fprintf(stderr,": ");
- for (i=0;i<index;i++)
-       {
-       if (buffer[i] < 32) fprintf(stderr, ".");
-       else fprintf(stderr, "%c",buffer[i]);
-       }
- fprintf(stderr,"\n");
-}
-
-/*wchar_t *                   T_WCHAR
-
-INPUT
-T_WCHAR
-    $var = SvToWChar($arg);
-    SAVEFREEPV($var);*/
-
-/* from http://cpansearch.perl.org/src/TBUSCH/Lucene-0.13/cpp/utils.cpp */
-/*wchar_t*
-SvToWChar(SV* arg)
-{
-    wchar_t* ret;
-    // Get string length of argument. This works for PV, NV and IV.
-    // The STRLEN typdef is needed to ensure that this will work correctly
-    // in a 64-bit environment.
-    STRLEN arg_len;
-    SvPV(arg, arg_len);
-
-    // Alloc memory for wide char string.  This could be a bit more
-    // then necessary.
-    Newz(0, ret, arg_len + 1, wchar_t);
-
-    U8* src = (U8*) SvPV_nolen(arg);
-    wchar_t* dst = ret;
-
-    if (SvUTF8(arg)) {
-        // UTF8 to wide char mapping
-        STRLEN len;
-        while (*src) {
-            *dst++ = utf8_to_uvuni(src, &len);
-            src += len;
-        }
-    } else {
-        // char to wide char mapping
-        while (*src) {
-            *dst++ = (wchar_t) *src++;
-        }
-    }
-    *dst = 0;
-    return ret;
-}*/
-
-
-
 const char* uninum_error_str() {
 	switch(uninum_err) {
 		case NS_ERROR_OKAY:                  return "No error";
@@ -96,7 +34,6 @@ const char* uninum_error_str() {
 	}
 	return "Invalid error";
 }
-
 
 int uninum_is_ok() {
 	return uninum_err == NS_ERROR_OKAY;
@@ -182,13 +119,11 @@ number_systems(Unicode::Number self)
 SV*
 _StringToNumberString(Unicode::Number self, SV* u32_str_sv, int NumberSystem)
 	INIT:
-		wchar_t u32_str_c[] =L"\x0ED5\x0ED7\x0ED6"; /* Lao digits 5 7 6 */
 		uint32_t* u32_str;
 		union ns_rval val;
 		STRLEN len;
 		int i;
 	CODE:
-		/* TODO */
 		uninum_err = 0;
 
 		u32_str = SvPV(u32_str_sv, len);
