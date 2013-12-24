@@ -1,6 +1,6 @@
 0.003 2013-12-24 09:01:27-0600
    - fix encoding issue in tests
-   - move the overload pragma so that it works on earlier
+   - move the overload pragma so that it works on earlier perl versions
 
 0.002 2013-12-23 18:25:53-0600
    - stray path in Makefile.PL: make sure Alien::Uninum is called at configure
