@@ -1,10 +1,12 @@
 package Unicode::Number::System;
 {
-  $Unicode::Number::System::VERSION = '0.002';
+  $Unicode::Number::System::VERSION = '0.003';
 }
 
 use strict;
 use warnings;
+
+use overload '""' => \&_stringify, fallback => 1;
 
 use constant NS_UNKNOWN => -1;
 use constant NS_ALLZERO => -2;
@@ -107,8 +109,6 @@ our %NS_STR_TO_ISO_15924 = (
 	Western                            => 'Zyyy', # Common
 );
 
-use overload '""' => \&_stringify, fallback => 1;
-
 sub _stringify { $_[0]->name; }
 
 sub iso15924_code {
@@ -135,7 +135,7 @@ Unicode::Number::System - representation of a number system
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
