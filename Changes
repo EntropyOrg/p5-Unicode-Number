@@ -1,5 +1,8 @@
-0.004 2013-12-24 12:58:06-0600
-   - better build
+0.004 2013-12-24 13:12:51-0600
+   - build fix that uses MakeMaker's CONFIGURE option to specify the build
+     prereq on Alien::Uninum then use it afterwards.
+     Closes <https://github.com/zmughal/p5-Unicode-Number/issues/13>
+     (thanks to @patch for finding this).
 
 0.003 2013-12-24 09:01:27-0600
    - fix encoding issue in tests
