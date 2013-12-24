@@ -49,7 +49,7 @@ my %WriteMakefileArgs = (
 );
 require Alien::Uninum;
 my $u = Alien::Uninum->new;
-$WriteMakefileArgs{CCFLAGS} = $u->cflags
+$WriteMakefileArgs{CCFLAGS} = $u->cflags;
 $WriteMakefileArgs{LIBS} = $u->libs;
 
 
