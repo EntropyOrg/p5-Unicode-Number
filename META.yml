@@ -25,6 +25,7 @@ requires:
   XSLoader: 0
   constant: 0
   overload: 0
+  perl: 5.018
   strict: 0
   warnings: 0
 resources:
