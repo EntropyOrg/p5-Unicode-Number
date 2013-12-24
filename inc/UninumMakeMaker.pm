@@ -21,6 +21,7 @@ my $u = Alien::Uninum->new;
 $WriteMakefileArgs{CCFLAGS} = $u->cflags
 $WriteMakefileArgs{LIBS} = $u->libs;
 END
+	$str;
 };
 
 __PACKAGE__->meta->make_immutable;
