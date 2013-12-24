@@ -1,7 +1,6 @@
 use Test::More;
 
 use utf8;
-use Encode qw/decode_utf8/;
 use_ok 'Unicode::Number';
 
 # TODO structured exceptions
