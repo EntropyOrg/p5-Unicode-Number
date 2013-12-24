@@ -47,10 +47,11 @@ my %WriteMakefileArgs = (
     "TESTS" => "t/*.t"
   }
 );
-require Alien::Uninum;
-my $u = Alien::Uninum->new;
-$WriteMakefileArgs{CCFLAGS} = $u->cflags;
-$WriteMakefileArgs{LIBS} = $u->libs;
+$WriteMakefileArgs{CONFIGURE} = sub {
+	require Alien::Uninum;
+	my $u = Alien::Uninum->new;
+	+{ CCFLAGS => $u->cflags; LIBS => $u->libs; };
+};
 
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {

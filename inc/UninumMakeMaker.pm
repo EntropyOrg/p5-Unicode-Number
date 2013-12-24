@@ -13,10 +13,11 @@ override _build_WriteMakefile_args => sub { +{
 override _build_WriteMakefile_dump => sub {
 	my $str = super();
 	$str .= <<'END';
-require Alien::Uninum;
-my $u = Alien::Uninum->new;
-$WriteMakefileArgs{CCFLAGS} = $u->cflags;
-$WriteMakefileArgs{LIBS} = $u->libs;
+$WriteMakefileArgs{CONFIGURE} = sub {
+	require Alien::Uninum;
+	my $u = Alien::Uninum->new;
+	+{ CCFLAGS => $u->cflags; LIBS => $u->libs; };
+};
 END
 	$str;
 };
