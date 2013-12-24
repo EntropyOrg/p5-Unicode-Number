@@ -3,17 +3,12 @@ use Moose;
 
 use Alien::Uninum;
 
-my $uni = Alien::Uninum->new;
-
-my $cflags = $uni->cflags;
-my $libs   = $uni->libs;
-
 extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
 
 override _build_WriteMakefile_args => sub { +{
     %{ super() },
-    CCFLAGS => $cflags,
-    LIBS => [ $libs ],
+    CCFLAGS => "Alien::Uninum->new->cflags",
+    LIBS => [ "Alien::Uninum->new->cflags" ],
     XS      => {
         "lib/Unicode/Number.xs" => "lib/Unicode/Number.c",
     }
