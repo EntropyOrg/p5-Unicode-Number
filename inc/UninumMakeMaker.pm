@@ -1,8 +1,6 @@
 package inc::UninumMakeMaker;
 use Moose;
 
-use Alien::Uninum;
-
 extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
 
 override _build_WriteMakefile_args => sub { +{

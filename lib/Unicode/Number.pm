@@ -6,7 +6,6 @@ package Unicode::Number;
 use strict;
 use warnings;
 
-use Alien::Uninum;
 use List::AllUtils qw/first/;
 use Encode qw(encode decode decode_utf8);
 use Config;
