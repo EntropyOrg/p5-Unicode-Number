@@ -16,7 +16,7 @@ override _build_WriteMakefile_dump => sub {
 $WriteMakefileArgs{CONFIGURE} = sub {
 	require Alien::Uninum;
 	my $u = Alien::Uninum->new;
-	+{ CCFLAGS => $u->cflags; LIBS => $u->libs; };
+	+{ CCFLAGS => $u->cflags, LIBS => $u->libs; };
 };
 END
 	$str;
