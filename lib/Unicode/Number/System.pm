@@ -3,6 +3,8 @@ package Unicode::Number::System;
 use strict;
 use warnings;
 
+use overload '""' => \&_stringify, fallback => 1;
+
 use constant NS_UNKNOWN => -1;
 use constant NS_ALLZERO => -2;
 use constant ALLZERO => (
@@ -103,8 +105,6 @@ our %NS_STR_TO_ISO_15924 = (
 	Tamil                              => 'Taml', # Tamil
 	Western                            => 'Zyyy', # Common
 );
-
-use overload '""' => \&_stringify, fallback => 1;
 
 sub _stringify { $_[0]->name; }
 
