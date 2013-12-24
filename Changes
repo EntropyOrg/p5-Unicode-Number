@@ -1,3 +1,6 @@
+0.004_01 2013-12-24 13:23:49-0600
+   - Alien::Uninum is a runtime prereq, not a build prereq.
+
 0.004 2013-12-24 13:12:51-0600
    - build fix that uses MakeMaker's CONFIGURE option to specify the build
      prereq on Alien::Uninum then use it afterwards.
