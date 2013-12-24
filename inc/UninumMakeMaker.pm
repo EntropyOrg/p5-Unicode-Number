@@ -7,8 +7,9 @@ extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
 
 override _build_WriteMakefile_args => sub { +{
     %{ super() },
-    CCFLAGS => \ sub { require Alien::Uninum; Alien::Uninum->new->cflags },
-    LIBS => [ \ sub { require Alien::Uninum; Alien::Uninum->new->cflags } ],
+    CONFIGURE => sub { require Alien::Uninum;
+        my $u = Alien::Uninum->new;
+        +{ CCFLAGS => $u->cflags, LIBS => $u->libs } },
     XS      => {
         "lib/Unicode/Number.xs" => "lib/Unicode/Number.c",
     }
