@@ -1,5 +1,7 @@
-0.001_01 2013-12-23 18:25:53-0600
-   - stray path in Makefile.PL
+0.002 2013-12-23 18:25:53-0600
+   - stray path in Makefile.PL: make sure Alien::Uninum is called at configure
+     time, not at release time (thanks to bulk88 for catching this)
+   - make Alien::Uninum a build prereq
 
 0.001 2013-12-23 16:45:38-0600
    - initial version

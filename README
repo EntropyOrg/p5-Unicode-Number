@@ -1,7 +1,7 @@
 
 
 This archive contains the distribution Unicode-Number,
-version 0.001_01:
+version 0.002:
 
   handle numerals in Unicode using the libuninum library
 

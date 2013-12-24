@@ -1,6 +1,6 @@
 package Unicode::Number;
 {
-  $Unicode::Number::VERSION = '0.001_01';
+  $Unicode::Number::VERSION = '0.002';
 }
 
 use strict;
@@ -108,7 +108,7 @@ Unicode::Number - handle numerals in Unicode using the libuninum library
 
 =head1 VERSION
 
-version 0.001_01
+version 0.002
 
 =head1 SYNOPSIS
 
