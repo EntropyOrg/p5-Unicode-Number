@@ -1,16 +1,15 @@
 use Test::More;
 
 use utf8;
-use Encode qw/decode_utf8/;
 use_ok 'Unicode::Number';
 
 my $data = [
-	{ ns => 'Lao', num => 576, str => decode_utf8("\x{0ED5}\x{0ED7}\x{0ED6}") },
-	{ ns => 'Gurmukhi', num => 132, str => decode_utf8("\x{0A67}\x{0A69}\x{0A68}") },
+	{ ns => 'Lao', num => 576, str => "\x{0ED5}\x{0ED7}\x{0ED6}" },
+	{ ns => 'Gurmukhi', num => 132, str => "\x{0A67}\x{0A69}\x{0A68}" },
 	# TODO test larger number (Math::BigInt::GMP)?
 ];
 
-my $lao_digits = decode_utf8("\x{0ED5}\x{0ED7}\x{0ED6}");
+my $lao_digits = "\x{0ED5}\x{0ED7}\x{0ED6}";
 my $uni = Unicode::Number->new;
 my $ns_lao = $uni->get_number_system_by_name('Lao');
 is( $ns_lao->name, 'Lao' );
