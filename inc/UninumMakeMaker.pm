@@ -7,7 +7,6 @@ extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
 
 override _build_WriteMakefile_args => sub { +{
     %{ super() },
-    CONFIGURE => sub {},
     XS      => {
         "lib/Unicode/Number.xs" => "lib/Unicode/Number.c",
     }

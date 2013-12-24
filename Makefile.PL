@@ -15,7 +15,6 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "handle numerals in Unicode using the libuninum library",
   "AUTHOR" => "Zakariyya Mughal <zmughal\@cpan.org>",
   "BUILD_REQUIRES" => {},
-  "CONFIGURE" => sub { "DUMMY" },
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
