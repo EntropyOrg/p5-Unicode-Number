@@ -1,6 +1,6 @@
 package Unicode::Number::System;
 {
-  $Unicode::Number::System::VERSION = '0.004';
+  $Unicode::Number::System::VERSION = '0.004_01';
 }
 
 use strict;
@@ -135,7 +135,7 @@ Unicode::Number::System - representation of a number system
 
 =head1 VERSION
 
-version 0.004
+version 0.004_01
 
 =head1 SYNOPSIS
 

@@ -14,9 +14,7 @@ use ExtUtils::MakeMaker 6.30;
 my %WriteMakefileArgs = (
   "ABSTRACT" => "handle numerals in Unicode using the libuninum library",
   "AUTHOR" => "Zakariyya Mughal <zmughal\@cpan.org>",
-  "BUILD_REQUIRES" => {
-    "Alien::Uninum" => 0
-  },
+  "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
@@ -25,6 +23,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Unicode::Number",
   "PREREQ_PM" => {
+    "Alien::Uninum" => 0,
     "Carp" => 0,
     "Encode" => 0,
     "List::AllUtils" => 0,
@@ -39,7 +38,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "utf8" => 0
   },
-  "VERSION" => "0.004",
+  "VERSION" => "0.004_01",
   "XS" => {
     "lib/Unicode/Number.xs" => "lib/Unicode/Number.c"
   },
