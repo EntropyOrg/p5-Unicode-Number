@@ -1,2 +1,5 @@
+0.001_01 2013-12-23 18:25:53-0600
+   - stray path in Makefile.PL
+
 0.001 2013-12-23 16:45:38-0600
    - initial version
