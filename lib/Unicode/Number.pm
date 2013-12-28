@@ -168,4 +168,6 @@ UTF-8 string to one of the types supported by L<Unicode::Number::Result>.
 
 L<libuninum|http://billposer.org/Software/libuninum.html>
 
+L<CLDR::Number>
+
 =cut

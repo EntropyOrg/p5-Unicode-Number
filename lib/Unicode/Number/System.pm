@@ -108,6 +108,12 @@ our %NS_STR_TO_ISO_15924 = (
 
 sub _stringify { $_[0]->name; }
 
+=attr iso15924_code
+
+Returns the L<ISO 15924 code|http://www.unicode.org/iso15924/codelists.html>
+for the number system's script.
+
+=cut
 sub iso15924_code {
 	my ($self) = @_;
 	return $NS_STR_TO_ISO_15924{$self->name};
