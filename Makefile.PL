@@ -35,7 +35,6 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "DDP" => 0,
     "Test::More" => 0,
     "utf8" => 0
   },
