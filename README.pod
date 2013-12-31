@@ -75,9 +75,15 @@ Otherwise, if the number system is unknown, returns C<undef>.
 
 The value of $digits_string must be encoded in UTF-8.
 
+=head2 version
+
+Returns a string with the version of the libuninum library.
+
 =head1 SEE ALSO
 
 L<libuninum|http://billposer.org/Software/libuninum.html>
+
+L<CLDR::Number>
 
 =head1 AUTHOR
 
