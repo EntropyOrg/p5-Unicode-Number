@@ -119,6 +119,16 @@ sub iso15924_code {
 
 
 
+sub maximum_value {
+	my ($self) = @_;
+	my $str = $self->_MaximumValue();
+	if( $str eq 'unlimited' ) {
+		return Unicode::Number::Result->_new('inf');
+	}
+	Unicode::Number::Result->_new($str);
+}
+
+
 1;
 
 # ABSTRACT: representation of a number system
@@ -154,6 +164,11 @@ L<Unicode::Number>.
 
 =head1 ATTRIBUTES
 
+=head2 iso15924_code
+
+Returns the L<ISO 15924 code|http://www.unicode.org/iso15924/codelists.html>
+for the number system's script.
+
 =head2 name
 
 Returns a string for the C<libuninum> name of the number system.
@@ -168,6 +183,12 @@ number systems").
 
 If C<false>, then the number system can only be used to convert strings to
 numbers. (in C<libuninum> terminology: "cover terms").
+
+=head2 maximum_value
+
+Returns a L<Unicode::Number::Result> with the largest representable value. This
+value may be unlimited and in that case we return a L<Unicode::Number::Result>
+with a value of infinity (C<inf>).
 
 =head1 AUTHOR
 

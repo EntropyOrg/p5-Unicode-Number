@@ -229,3 +229,22 @@ convertible_in_both_directions(Unicode::Number::System self)
 	CODE:
 		RETVAL = SvREFCNT_inc(*hv_fetchs(self, "_both_dir", 0));
 	OUTPUT: RETVAL
+
+SV*
+_MaximumValue(Unicode::Number::System self)
+	INIT:
+		int ns;
+		char* max_str;
+		STRLEN len;
+	CODE:
+		uninum_err = 0;
+		ns = SvIV(*hv_fetchs(self, "_id", 0));
+		max_str = UninumStringMaximumValue(ns);
+		if(0 != uninum_err){
+			/* TODO structured exceptions: croak_sv */
+			croak("libuninum: (%d) %s", uninum_err, uninum_error_str());
+		} else {
+			len = strlen(max_str);
+			RETVAL = newSVpv(max_str, len);
+		}
+	OUTPUT: RETVAL
