@@ -8,7 +8,7 @@ Unicode::Number - handle numerals in Unicode using the libuninum library
 
 =head1 VERSION
 
-version 0.004_01
+version 0.005
 
 =head1 SYNOPSIS
 
