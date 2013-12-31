@@ -4,9 +4,13 @@ use_ok 'Unicode::Number';
 
 my $uni = Unicode::Number->new();
 
-is( $uni->get_number_system_by_name('Roman'), 9999);
-is( $uni->get_number_system_by_name('Egyptian'), 9999999);
-is( $uni->get_number_system_by_name('Arabic_Alphabetic'), 1999 );
+my $data = {
+	Roman => 9999,
+	Egyptian => 9999999,
+	'Arabic_Alphabetic' => 1999,
+	'Lao' => 0+'inf',
+	'Western' => 0+'inf',
+};
 
-is( $uni->get_number_system_by_name('Lao'), inf);
-is( $uni->get_number_system_by_name('Western'), inf);
+
+is( $uni->get_number_system_by_name('Western')->maximum_value, inf);
