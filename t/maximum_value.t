@@ -18,7 +18,8 @@ while( ($ns_name,$max) = each %$data ) {
 	#use DDP; p $ns;
 	#use DDP; p $ns->maximum_value;
 	#is( $ns->maximum_value->to_numeric, $max);
-	is( $uni->get_number_system_by_name($ns_name)->maximum_value->to_numeric, $max);
+	is( $uni->get_number_system_by_name($ns_name)->maximum_value->to_numeric,
+		$max, "maximum value for $ns_name");
 }
 
 
