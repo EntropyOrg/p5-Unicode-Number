@@ -138,6 +138,23 @@ numbers. (in C<libuninum> terminology: "cover terms").
 
 =cut
 
+=attr maximum_value
+
+Returns a L<Unicode::Number::Result> with the largest representable value. This
+value may be unlimited and in that case we return a L<Unicode::Number::Result>
+with a value of infinity (C<inf>).
+
+=cut
+
+sub maximum_value {
+	my ($self) = @_;
+	my $str = $self->_MaximumValue();
+	if( $str eq 'unlimited' ) {
+		return Unicode::Number::Result->_new('inf');
+	}
+	Unicode::Number::Result->_new($str);
+}
+
 
 1;
 
