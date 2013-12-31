@@ -13,4 +13,4 @@ my $data = {
 };
 
 
-is( $uni->get_number_system_by_name('Western')->maximum_value, inf);
+is( $uni->get_number_system_by_name('Western')->to_numeric, inf);
