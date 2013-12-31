@@ -144,6 +144,12 @@ sub _get_utf32_encoding {
 	$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE'
 }
 
+=method version
+
+Returns a string with the version of the libuninum library.
+
+=cut
+
 1;
 # ABSTRACT: handle numerals in Unicode using the libuninum library
 
