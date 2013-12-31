@@ -12,5 +12,10 @@ my $data = {
 	'Western' => 0+'inf',
 };
 
+my ($ns, $max);
+while( ($ns,$max) = each %$data ) {
+	is( $uni->get_number_system_by_name($ns)->maximum_value->to_numeric, $max);
+}
 
-is( $uni->get_number_system_by_name('Western')->maximum_value->to_numeric, inf);
+
+done_testing;
