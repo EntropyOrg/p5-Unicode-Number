@@ -5,7 +5,7 @@ use_ok 'Unicode::Number';
 my $uni = Unicode::Number->new();
 
 my $data = {
-	Sinhala => 999,
+	Sinhala => 9999,
 	Egyptian => 9999999,
 	'Arabic_Alphabetic' => 1999,
 	'Lao' => 0+'inf',
