@@ -176,6 +176,7 @@ _NumberStringToString(Unicode::Number self, SV* decimal_str_sv, int NumberSystem
 		decimal_str = SvPV(decimal_str_sv, len);
 		val.s = decimal_str;
 		u32_str = IntToString(&val, NumberSystem, NS_TYPE_STRING);
+		Safefree(decimal_str);
 
 		if(0 != uninum_err){
 			/* TODO structured exceptions: croak_sv */
@@ -185,6 +186,7 @@ _NumberStringToString(Unicode::Number self, SV* decimal_str_sv, int NumberSystem
 			u32_idx = u32_str;
 			while( *(u32_idx++) ) len += sizeof(U32);
 			RETVAL = newSVpv((char*)u32_str, len );
+			Safefree(u32_str);
 		}
 	OUTPUT: RETVAL
 
@@ -246,5 +248,6 @@ _MaximumValue(Unicode::Number::System self)
 		} else {
 			len = strlen(max_str);
 			RETVAL = newSVpv(max_str, len);
+			Safefree(max_str);
 		}
 	OUTPUT: RETVAL

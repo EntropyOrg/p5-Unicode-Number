@@ -6,7 +6,6 @@ Makefile.PL
 Number.xs
 README
 dist.ini
-fatpacker.trace
 inc/UninumMakeMaker.pm
 lib/Unicode/Number.pm
 lib/Unicode/Number/Result.pm
