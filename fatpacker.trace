@@ -1,0 +1,9 @@
+Config.pm
+warnings/register.pm
+vars.pm
+Exporter/Heavy.pm
+Test/Builder/Module.pm
+utf8.pm
+Test/Builder.pm
+Test/More.pm
+PerlIO.pm
