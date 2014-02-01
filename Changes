@@ -1,3 +1,7 @@
+0.006 2014-02-01 13:03:37-0600
+   - free memory
+   - use PERL_NO_GET_CONTEXT
+
 0.005 2013-12-31 12:09:19-0600
    - add maximum_value method to Unicode::Number::System
    - doc fixes
