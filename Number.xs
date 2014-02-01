@@ -1,5 +1,6 @@
 /* vim: ts=4 sw=4
  */
+#define PERL_NO_GET_CONTEXT
 #include "EXTERN.h"
 #include "perl.h"
 #include "XSUB.h"
