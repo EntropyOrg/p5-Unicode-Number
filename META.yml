@@ -21,7 +21,6 @@ requires:
   Carp: 0
   Encode: 0
   List::AllUtils: 0
-  Math::BigInt: 0
   XSLoader: 0
   constant: 0
   overload: 0
