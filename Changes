@@ -1,5 +1,6 @@
 0.007 2014-03-09 11:56:40-0500
    - make sure Math::BigInt is a recommended dependency
+   - more tests
 
 0.006 2014-02-01 13:03:37-0600
    - free memory
