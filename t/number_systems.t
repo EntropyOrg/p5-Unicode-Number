@@ -28,6 +28,6 @@ is( $ns_lao, 'Lao');
 is( $ns_lao->iso15924_code, 'Laoo' );
 
 my $ns_invalid = $uni->get_number_system_by_name('NOT_A_NUMBER_SYSTEM');
-ok( ! $ns_invalid );
+is( $ns_invalid, undef );
 
 done_testing;
