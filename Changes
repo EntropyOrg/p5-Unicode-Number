@@ -1,3 +1,6 @@
+0.008 2014-06-07 18:13:57-0500
+   - doc fixes
+
 0.007 2014-03-09 11:56:40-0500
    - make sure Math::BigInt is a recommended dependency
    - more tests
