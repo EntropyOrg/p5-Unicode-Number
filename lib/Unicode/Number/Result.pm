@@ -1,5 +1,5 @@
 package Unicode::Number::Result;
-$Unicode::Number::Result::VERSION = '0.007';
+$Unicode::Number::Result::VERSION = '0.008';
 use strict;
 use warnings;
 
@@ -43,7 +43,7 @@ Unicode::Number::Result - class to obtain different representations of a string 
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
@@ -63,13 +63,19 @@ L<Unicode::Number>.
 
 =head2 to_string
 
+C<to_string()>
+
 Returns a string that represents the result.
 
 =head2 to_numeric
 
+C<to_numeric()>
+
 Returns an integer that numifies the result.
 
-=head2 to_numeric
+=head2 to_bigint
+
+C<to_bigint()>
 
 Returns a L<Math::BigInt> of the result.
 

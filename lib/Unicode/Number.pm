@@ -1,5 +1,5 @@
 package Unicode::Number;
-$Unicode::Number::VERSION = '0.007';
+$Unicode::Number::VERSION = '0.008';
 use strict;
 use warnings;
 
@@ -106,7 +106,7 @@ Unicode::Number - handle numerals in Unicode using the libuninum library
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
@@ -127,18 +127,26 @@ UTF-8 string to one of the types supported by L<Unicode::Number::Result>.
 
 =head2 new
 
+C<new()>
+
 Returns a new instance of L<Unicode::Number>.
 
 =head2 number_systems
 
+C<number_systems()>
+
 Returns an arrayref of L<Unicode::Number::System> instances.
 
-=head2 get_number_system_by_name($name)
+=head2 get_number_system_by_name
+
+C<get_number_system_by_name($name)>
 
 Returns the L<Unicode::Number::System> that has the name given by the $name
 parameter (string) or C<undef> if not found.
 
-=head2 string_to_number($number_system, $digits_string)
+=head2 string_to_number
+
+C<string_to_number($number_system, $digits_string)>
 
 Returns a L<Unicode::Number::Result> that contains the results of converting
 the string given in the $digits_string parameter to a number in the number
@@ -149,7 +157,9 @@ or a string (see L<get_number_system_by_name|Unicode::Number/get_number_system_b
 
 The value of $digits_string must be encoded in UTF-8.
 
-=head2 number_to_string($number_system, $number)
+=head2 number_to_string
+
+C<number_to_string($number_system, $number)>
 
 Returns a UTF-8 encoded string that represents the value of $number in the
 number system represented by $number_system.
@@ -160,7 +170,9 @@ or a string (see L<get_number_system_by_name|Unicode::Number/get_number_system_b
 The value of $number can be either a numeric integer value or a string that
 matches the regular expression C</[0-9]+/>.
 
-=head2 guess_number_system($digits_string)
+=head2 guess_number_system
+
+C<guess_number_system($digits_string)>
 
 Returns the L<Unicode::Number::System> that matches the contents of the numbers
 in the string $digits_string if it can be found.
@@ -174,6 +186,8 @@ Otherwise, if the number system is unknown, returns C<undef>.
 The value of $digits_string must be encoded in UTF-8.
 
 =head2 version
+
+C<version()>
 
 Returns a string with the version of the libuninum library.
 
