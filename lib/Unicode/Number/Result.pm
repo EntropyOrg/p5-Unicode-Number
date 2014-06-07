@@ -10,6 +10,8 @@ sub _new {
 
 =method to_string
 
+C<to_string()>
+
 Returns a string that represents the result.
 
 =cut
@@ -21,6 +23,8 @@ sub to_string {
 
 =method to_numeric
 
+C<to_numeric()>
+
 Returns an integer that numifies the result.
 
 =cut
@@ -29,7 +33,9 @@ sub to_numeric {
 	return 0+$$self;
 }
 
-=method to_numeric
+=method to_bigint
+
+C<to_bigint()>
 
 Returns a L<Math::BigInt> of the result.
 

@@ -15,6 +15,8 @@ XSLoader::load( 'Unicode::Number', $Unicode::Number::VERSION );
 
 =method new
 
+C<new()>
+
 Returns a new instance of L<Unicode::Number>.
 
 =cut
@@ -24,11 +26,15 @@ sub new {
 
 =method number_systems
 
+C<number_systems()>
+
 Returns an arrayref of L<Unicode::Number::System> instances.
 
 =cut
 
-=method get_number_system_by_name($name)
+=method get_number_system_by_name
+
+C<get_number_system_by_name($name)>
 
 Returns the L<Unicode::Number::System> that has the name given by the $name
 parameter (string) or C<undef> if not found.
@@ -39,7 +45,9 @@ sub get_number_system_by_name {
 	return first { $_->name eq $name } @{ $self->number_systems };
 }
 
-=method string_to_number($number_system, $digits_string)
+=method string_to_number
+
+C<string_to_number($number_system, $digits_string)>
 
 Returns a L<Unicode::Number::Result> that contains the results of converting
 the string given in the $digits_string parameter to a number in the number
@@ -61,7 +69,9 @@ sub string_to_number {
 	return Unicode::Number::Result->_new($num_str) if defined $num_str;
 }
 
-=method number_to_string($number_system, $number)
+=method number_to_string
+
+C<number_to_string($number_system, $number)>
 
 Returns a UTF-8 encoded string that represents the value of $number in the
 number system represented by $number_system.
@@ -86,7 +96,9 @@ sub number_to_string {
 	return $self->_utf32_str_to_utf8_str($digits_string_u32);
 }
 
-=method guess_number_system($digits_string)
+=method guess_number_system
+
+C<guess_number_system($digits_string)>
 
 Returns the L<Unicode::Number::System> that matches the contents of the numbers
 in the string $digits_string if it can be found.
@@ -145,6 +157,8 @@ sub _get_utf32_encoding {
 }
 
 =method version
+
+C<version()>
 
 Returns a string with the version of the libuninum library.
 
