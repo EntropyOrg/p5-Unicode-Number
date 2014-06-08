@@ -1,5 +1,5 @@
 package Unicode::Number::Result;
-$Unicode::Number::Result::VERSION = '0.008';
+$Unicode::Number::Result::VERSION = '0.009';
 use strict;
 use warnings;
 
@@ -43,7 +43,7 @@ Unicode::Number::Result - class to obtain different representations of a string 
 
 =head1 VERSION
 
-version 0.008
+version 0.009
 
 =head1 SYNOPSIS
 

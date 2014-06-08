@@ -17,6 +17,7 @@ my %WriteMakefileArgs = (
   "AUTHOR" => "Zakariyya Mughal <zmughal\@cpan.org>",
   "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
+    "Alien::Uninum" => 0,
     "ExtUtils::MakeMaker" => "6.30"
   },
   "DISTNAME" => "Unicode-Number",
@@ -38,7 +39,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "utf8" => 0
   },
-  "VERSION" => "0.008",
+  "VERSION" => "0.009",
   "XS" => {
     "lib/Unicode/Number.xs" => "lib/Unicode/Number.c"
   },
