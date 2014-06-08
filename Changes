@@ -1,3 +1,7 @@
+0.009 2014-06-08 11:12:09-0500
+   - build fix: add Alien::Uninum to configure_requires.
+     fixes: <https://rt.cpan.org/Ticket/Display.html?id=96325>. Thanks Slaven Rezic!
+
 0.008 2014-06-07 18:13:57-0500
    - doc fixes
 
