@@ -42,6 +42,7 @@ parameter (string) or C<undef> if not found.
 =cut
 sub get_number_system_by_name {
 	my ($self, $name) = @_;
+	return unless defined $name;
 	return first { $_->name eq $name } @{ $self->number_systems };
 }
 
